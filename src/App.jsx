@@ -1,13 +1,13 @@
+import { Outlet } from 'react-router'
 import './App.css'
-import Banner from './Components/Banner'
 import Header from './Components/Header'
-const fa = fetch('http://localhost:4710/user').then(res => res.json())
-console.log(fa)
+import MouseMove from './Components/MouseMove'
+
 function App() {
   return (<>
+    <MouseMove />
     <Header />
-    <Banner />
-    <Footer
+    <Outlet />
   </>)
 }
 

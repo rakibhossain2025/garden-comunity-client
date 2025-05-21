@@ -1,0 +1,23 @@
+.ripple-effect {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  background: rgba(94, 255, 0, 0.795);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: ripple 0.2s ease-out;
+  z-index: 9999;
+}
+@media screen  {
+  
+}
+@keyframes ripple {
+  from {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0.8;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
+}
