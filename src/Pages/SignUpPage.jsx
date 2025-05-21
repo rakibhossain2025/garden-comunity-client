@@ -4,14 +4,38 @@ import { FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 
 const SignUpPage = () => {
 
-  const { handleCreateUser } = useContext(UserAuth)
-
-  console.log(handleCreateUser)
-
+  const { handleCreateUser, setUser } = useContext(UserAuth)
+  console.log(setUser)
 
   const handleSubmit = e => {
     e.preventDefault()
-    const formData = Object.fromEntries(new FormData(e.target).entries())
+    const form = e.target;
+    const formData = new FormData(form)
+    const { email, password, ...OtherData } = Object.fromEntries(formData.entries())
+
+    handleCreateUser(email, password)
+      .then(result => {
+        setUser(result.user)
+        const DbUser = {
+          email,
+          ...OtherData
+        }
+
+        fetch('http://localhost:5000/users', {
+          method: "POST",
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(DbUser)
+        }).then(res => res.json()).then(data => { 
+          console.log(data)
+          if (data.insertedId) {
+            alert("paise")
+          }
+        })
+        console.log(result)
+      })
+      .catch(e => {
+        console.log(e)
+      })
 
 
   }

@@ -60,11 +60,10 @@ const AuthProvider = ({ children }) => {
       unsubscribe()
     }
   })
-  const names = 'rakib'
 
   const userInfo = {
-    names,
     user,
+    setUser,
     handleCreateUser,
     handleLoginUser,
     handleSignOut,

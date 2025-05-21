@@ -1,5 +1,4 @@
 import React from 'react';
-// import NavBer_Link from '../utility/NavBer_Link';
 import { CgMenuGridR } from 'react-icons/cg';
 import { Link } from 'react-router';
 import NavBer_Link from '../utility/NavBer_Link';
@@ -11,11 +10,11 @@ const Header = () => {
 
         <div className="flex items-center gap-2">
           <img
-            src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png"
-            alt="logo"
+            src="https://cdn-icons-png.flaticon.com/512968/5968705.png"
+            alt="logo nor found"
             className="w-10 h-10"
           />
-          <span className="text-2xl font-bold text-blue-700">RoomieFind</span>
+          <span className="text-2xl font-bold text-blue-700">Garden</span>
         </div>
         <div className="hidden md:flex items-center gap-6 text-gray-700 font-medium list-none">
           <NavBer_Link />
