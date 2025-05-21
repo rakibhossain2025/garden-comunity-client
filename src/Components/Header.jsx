@@ -1,27 +1,62 @@
 import React from 'react';
+// import NavBer_Link from '../utility/NavBer_Link';
+import { CgMenuGridR } from 'react-icons/cg';
 import { Link } from 'react-router';
-import NavBer_Link from '../utility/Navber_Link';
+import NavBer_Link from '../utility/NavBer_Link';
 const Header = () => {
-  return (
-    <header className="container flex justify-between py-4 items-center bg-gray-200 mx-auto">
+  const user = 0
+  return (<>
+    <div className="bg-white shadow-md sticky top-0 z-50">
+      <div className=" mx-auto navbar px-4 py-3 flex justify-between items-center">
 
-        <a rel="noopener noreferrer" href="#" aria-label="Back to homepage" className="flex items-center p-2">
-          <img src="https://i.ibb.co/" alt="" />
-        </a>
-        <ul className="items-stretch hidden gap-4 lg:flex">
-          <NavBer_Link />
-        </ul>
-        <div className="items-center flex-shrink-0 hidden lg:flex">
-          <button className="self-center px-8 py-3 rounded">Sign in</button>
-          <button className="self-center px-8 py-3 font-semibold rounded dark:bg-violet-600 dark:text-gray-50">Sign up</button>
+        <div className="flex items-center gap-2">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png"
+            alt="logo"
+            className="w-10 h-10"
+          />
+          <span className="text-2xl font-bold text-blue-700">RoomieFind</span>
         </div>
-        <button className="p-4 lg:hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-gray-800">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-    </header>
-  );
-};
+        <div className="hidden md:flex items-center gap-6 text-gray-700 font-medium list-none">
+          <NavBer_Link />
+        </div>
 
+        <div className="space-x-2 relative">
+          {user ? (
+            <div className="group relative cursor-pointer">
+              <img
+                src={user.photoURL || "https://i.ibb.co/4Zg2z2M/user.png"}
+                alt="profile"
+                className="w-10 h-10 rounded-full border-2 border-blue-500"
+              />
+              <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-all duration-200 z-50">
+                <p className="px-4 py-2 text-sm text-gray-700 font-semibold border-b">
+                  {user.displayName || "Unknown User"}
+                </p>
+                <button
+                  // onClick={handleLogout}
+                  className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className='flex gap-2'>
+              <Link to="/signin">
+                <button className="btn btn-outline btn-primary px-6">signin</button>
+              </Link>
+              <Link to="/signup" className='lg:block hidden'>
+                <button className="btn btn-outline btn-primary px-6">signup</button>
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </>
+  )
+}
 export default Header;
+
+

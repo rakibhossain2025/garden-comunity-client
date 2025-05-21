@@ -1,14 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { useContext } from 'react';
+import { Link, NavLink } from 'react-router';
+import { UserAuth } from '../Context/UserAuth';
 
 const NavBer_Link = () => {
+  const { user } = useContext(UserAuth)
   return (
     <>
-      <li><Link to={'/'}>Home </Link></li>
-      <li><Link to={'/explore-gardeners'}>Explore Gardeners</Link></li>
-      <li><Link to={'/browse-tips'}>Browse Tips </Link></li>
-      <li><Link to={'/share-a-garden-tip'}>Share a Garden Tip</Link></li>
-      <li><Link to={'/My-tips'}> My Tips</Link></li>
+      <li> <NavLink to="/" className="hover:text-green-600 transition duration-300 relative group" >Home </NavLink></li>
+      <li> <NavLink to="/explore-gardeners" className="hover:text-green-600 transition duration-300 relative group" >Explore Gardeners </NavLink></li >
+      <li> <NavLink to="/browse-tips" className="hover:text-green-600 transition duration-300 relative group" >Browse Tips </NavLink></li>
+      {user && <>
+        <li> <NavLink to="/share-a-garden-tip" className="hover:text-green-600 transition duration-300 relative group" >Share a Garden Tip </NavLink></li>
+        <li> <NavLink to="/My-tips" className="hover:text-green-600 transition duration-300 relative group" >My Tips </NavLink></li>
+      </>}
     </>
   );
 };
