@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserAuth } from '../Context/UserAuth';
 
-const signinPage = () => {
+const SigninPage = () => {
+  const { handleLoginUser } = useContext(UserAuth)
+  console.log(handleLoginUser)
+  // const user = useContext(UserAuth)
   const handleSubmit = e => {
     e.preventDefault()
     const fromData = Object.fromEntries(new FormData(e.target).entries())
@@ -52,4 +56,4 @@ const signinPage = () => {
   );
 };
 
-export default signinPage;
+export default SigninPage;

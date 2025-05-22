@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ActiveGardener = ({activeUG}) => {
-  console.log(activeUG)
+const ActiveGardener = () => {
+  // console.log(activeUG)
   return (
     <div>
       dsaf

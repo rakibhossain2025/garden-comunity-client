@@ -1,9 +1,41 @@
-import React from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { CgMenuGridR } from 'react-icons/cg';
 import { Link } from 'react-router';
 import NavBer_Link from '../utility/NavBer_Link';
-const Header = () => {
-  const user = 0
+import { UserAuth } from '../Context/UserAuth';
+const Header = ({ SetSwitchDOL, switchDOL }) => {
+  const { user, handleSignOut } = useContext(UserAuth)
+
+  const [dropdown, setDropDown] = useState(false)
+  const dropdownClose = useRef(null)
+
+  useEffect(() => {
+    const handleClickOutside = e => {
+      if (dropdownClose.current && !dropdownClose.current.contains(e.target)) {
+        setDropDown(false)
+      }
+    }
+    const handleEscKey = (e) => {
+      if (e.key === "Escape") {
+        setDropDown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener("keydown", handleEscKey)
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+      document.removeEventListener("keydown", handleEscKey)
+    }
+  }, [])
+
+
+  const handleLogout = () => {
+    handleSignOut()
+  }
+
+
   return (<>
     <div className="bg-white shadow-md sticky top-0 z-50">
       <div className=" mx-auto navbar px-4 py-3 flex justify-between items-center">
@@ -13,8 +45,9 @@ const Header = () => {
             src="https://cdn-icons-png.flaticon.com/512968/5968705.png"
             alt="logo nor found"
             className="w-10 h-10"
+
           />
-          <span className="text-2xl font-bold text-blue-700">Garden</span>
+          <span onClick={() => SetSwitchDOL(!switchDOL)} className="text-2xl font-bold text-blue-700">Garden</span>
         </div>
         <div className="hidden md:flex items-center gap-6 text-gray-700 font-medium list-none">
           <NavBer_Link />
@@ -22,23 +55,23 @@ const Header = () => {
 
         <div className="space-x-2 relative">
           {user ? (
-            <div className="group relative cursor-pointer">
+            <div className="relative cursor-pointer">
               <img
                 src={user.photoURL || "https://i.ibb.co/4Zg2z2M/user.png"}
                 alt="profile"
-                className="w-10 h-10 rounded-full border-2 border-blue-500"
+                onClick={() => { setDropDown(!dropdown) }}
+                className="w-10 h-10 rounded-full cursor-pointer border hover:ring-2 hover:ring-blue-500 transition duration-200"
               />
-              <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-all duration-200 z-50">
-                <p className="px-4 py-2 text-sm text-gray-700 font-semibold border-b">
-                  {user.displayName || "Unknown User"}
-                </p>
-                <button
-                  // onClick={handleLogout}
-                  className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-                >
-                  Logout
-                </button>
-              </div>
+              {
+                dropdown ?
+                  <div className="absolute right-0 mt-2 w-40 bg-white border shadow-lg rounded-md z-50 p-2" ref={dropdownClose}>
+                    <p className="text-sm text-gray-700 mb-2">Hi, {user.name ? user.name : 'Rakib'}</p>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                    >Logout</button>
+                  </div> : ''
+              }
             </div>
           ) : (
             <div className='flex gap-2'>
@@ -52,7 +85,7 @@ const Header = () => {
           )}
         </div>
       </div>
-    </div>
+    </div >
   </>
   )
 }

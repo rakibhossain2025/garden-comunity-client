@@ -1,12 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserAuth } from '../Context/UserAuth';
 import { FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 
 const SignUpPage = () => {
 
   const { handleCreateUser, setUser } = useContext(UserAuth)
-  console.log(setUser)
 
+  const [signUpError, setSignUpError] = useState('')
+  if (signUpError) {
+    alert(signUpError)
+  }
   const handleSubmit = e => {
     e.preventDefault()
     const form = e.target;
@@ -20,12 +23,11 @@ const SignUpPage = () => {
           email,
           ...OtherData
         }
-
         fetch('http://localhost:5000/users', {
           method: "POST",
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify(DbUser)
-        }).then(res => res.json()).then(data => { 
+        }).then(res => res.json()).then(data => {
           console.log(data)
           if (data.insertedId) {
             alert("paise")
@@ -34,7 +36,7 @@ const SignUpPage = () => {
         console.log(result)
       })
       .catch(e => {
-        console.log(e)
+        setSignUpError(e.message)
       })
 
 
