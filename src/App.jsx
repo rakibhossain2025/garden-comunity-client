@@ -20,7 +20,7 @@ function App() {
   }, [switchDOL])
 
   return (<>
-    <MouseMove >    </MouseMove>
+    <MouseMove ></MouseMove>
       <Header switchDOL={switchDOL} SetSwitchDOL={SetSwitchDOL} />
       {/* {switchDOL ? '🌙 Dark Mode' : '☀️ Light Mode'} */}
       <Outlet />

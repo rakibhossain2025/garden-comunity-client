@@ -30,7 +30,7 @@ const MouseMove = () => {
     };
   }, []);
   return (
-    <span className='w-4 h-4 rounded-sm border hidden lg:flex border-red-500 bg-transparent fixed animate-spin' id='mouseBg'></span>
+    <span className='w-4 h-5 z-50 rounded-sm border hidden lg:flex border-green-500 bg-transparent fixed animate-spin' id='mouseBg'></span>
   );
 };
 

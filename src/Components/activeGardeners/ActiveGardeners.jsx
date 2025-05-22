@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-const ActiveGardeners = () => {
-  const [activeGardener, setActiveGardener] = useState([])
-  useEffect(() => {
-    fetch('http://localhost:5000/active-gardeners')
-      .then(res => res.json())
-      .then(data => {
-        setActiveGardener(data)
-      })
-  }, [])
+const ActiveGardeners = ({ activeGardener }) => {
+
   return (
     <>
       <div className="grid grid-cols-3 gap-4">
