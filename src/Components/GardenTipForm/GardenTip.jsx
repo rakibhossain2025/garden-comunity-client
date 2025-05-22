@@ -12,7 +12,7 @@ const GardenTip = () => {
     const popUpTitle = e.target.title.value
     const formData = Object.fromEntries(new FormData(e.target).entries())
     console.log(formData)
-    fetch('http://localhost:5000/tips', {
+    fetch('https://assignment-10-server-virid-theta.vercel.app/tips', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -56,11 +56,14 @@ const GardenTip = () => {
           className="w-full outline-none p-2 border border-green-600 rounded"
           required
         />
-        <label className="relative">Photo Url<span className="text-red-500 absolute -right-2 text-xl">*</span></label>
+        <label className="relative">Photo Url<span className="text-red-500 absolute -right-2 text-xl">*</span >
+          <span className="text-sm ml-2 text-green-700">(Example: myphoto.com)</span>
+        </label>
         <input
           type="text"
           name="imageUrl"
           placeholder="Image URL"
+          pattern="^(https?://)?([a-zA-Z0-9]([a-zA-Z0-9\-].*[a-zA-Z0-9])?\.)+[a-zA-Z].*$"
           className="w-full outline-none p-2 border border-green-600 rounded"
           required
         />

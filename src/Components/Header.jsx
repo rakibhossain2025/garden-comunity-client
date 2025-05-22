@@ -65,7 +65,7 @@ const Header = ({ SetSwitchDOL, switchDOL }) => {
               {
                 dropdown ?
                   <div className="absolute right-0 mt-2 w-40 bg-white border shadow-lg rounded-md z-50 p-2" ref={dropdownClose}>
-                    <p className="text-sm text-gray-700 mb-2">Hi, {user.name ? user.name : 'Rakib'}</p>
+                    <p className="text-sm text-gray-700 mb-2">Hi, {user.displayName ? user.displayName : 'Rakib'}</p>
                     <button
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"

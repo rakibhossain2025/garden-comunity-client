@@ -3,6 +3,7 @@ import './App.css'
 import Header from './Components/Header'
 import MouseMove from './Components/MouseMove'
 import { useEffect, useState } from 'react'
+import Footer from './Components/Footer'
 
 function App() {
   const [switchDOL, SetSwitchDOL] = useState(false)
@@ -21,9 +22,10 @@ function App() {
 
   return (<>
     <MouseMove ></MouseMove>
-      <Header switchDOL={switchDOL} SetSwitchDOL={SetSwitchDOL} />
-      {/* {switchDOL ? '🌙 Dark Mode' : '☀️ Light Mode'} */}
-      <Outlet />
+    <Header switchDOL={switchDOL} SetSwitchDOL={SetSwitchDOL} />
+    {/* {switchDOL ? '🌙 Dark Mode' : '☀️ Light Mode'} */}
+    <Outlet />
+    <Footer />
   </>)
 }
 

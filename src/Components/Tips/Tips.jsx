@@ -4,7 +4,7 @@ import TipTableBody from './TipTableBody';
 const Tips = () => {
   const [allTips, setAllTips] = useState([])
   useEffect(() => {
-    fetch('http://localhost:5000/active-gardeners')
+    fetch('https://assignment-10-server-virid-theta.vercel.app/active-gardeners')
       .then(res => res.json())
       .then(data => setAllTips(data))
   }, [])

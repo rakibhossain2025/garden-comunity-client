@@ -9,6 +9,8 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
   const [loginError, setLoginError] = useState(null)
   const [SigninError, setSigninError] = useState(null)
+
+
   const handleCreateUser = async (email, password) => {
     setLoading(true);
     setSigninError(null);
@@ -25,24 +27,21 @@ const AuthProvider = ({ children }) => {
   };
 
   const handleLoginUser = async (email, password) => {
-    setLoading(true);
-    setLoginError(null);
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      setUser(userCredential.user);
-      return userCredential;
-    } catch (error) {
-      setLoginError(error.message);
-      throw error;
-    } finally {
-      setLoginError(false);
+      const signinWithPass = signInWithEmailAndPassword(auth, email, password)
+      setUser(signinWithPass.user)
+      return signinWithPass
+    } catch (e) {
+      setLoginError(e.code)
     }
   };
+
+
   const provider = new GoogleAuthProvider()
+
   const googleSign = () => {
     return signInWithPopup(auth, provider)
   }
-
 
   const handleSignOut = () => {
     signOut(auth).then(u => {
@@ -68,6 +67,7 @@ const AuthProvider = ({ children }) => {
     handleLoginUser,
     handleSignOut,
     loading,
+    setLoginError,
     loginError,
     SigninError,
     googleSign

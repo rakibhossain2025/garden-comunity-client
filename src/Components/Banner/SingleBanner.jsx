@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SingleBanner = ({ trending }) => {
-  console.log(trending)
+ 
   const { description, imageUrl, title, _id } = trending
   return (
     <div style={{

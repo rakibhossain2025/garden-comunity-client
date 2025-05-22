@@ -6,11 +6,12 @@ const Banner = ({ activeGardener }) => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 2000,
-    autoplaySpeed: 5000,
+    speed: 1000,
+    autoplaySpeed: 3000,
     slidesToScroll: 1,
     autoplay: true,
     slidesToShow: 1,
+    pauseOnHover: false
   };
   return (
     <>
