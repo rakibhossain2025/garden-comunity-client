@@ -33,13 +33,14 @@ export const router = createBrowserRouter([{
       Component: Home
     },
     {
-      path: '/share-a-garden-tip', element: <Private><GardenTip /></Private>
+      path: '/share-a-garden-tip',
+      element: <Private><GardenTip /></Private>
     },
     {
       path: '/explore-gardeners',
       hydrateFallbackElement: <Loading />,
       loader: async () => {
-        const response = await fetch("https://assignment-10-server-virid-theta.vercel.app/active-gardeners");
+        const response = await fetch("http://localhost:5000/active-gardeners");
         const data = await response.json();
         return data
       },
@@ -49,16 +50,34 @@ export const router = createBrowserRouter([{
       path: '/browse-tips',
       hydrateFallbackElement: <Loading />,
       loader: async () => {
-        const response = await fetch('https://assignment-10-server-virid-theta.vercel.app/active-gardeners')
+        const response = await fetch('http://localhost:5000/active-gardeners')
         const data = await response.json();
         return data
       },
       Component: Tips
     },
-    { path: '/tip-details/:id', element: <Private><TipDetails /></Private> },
-    { path: '/My-tips', element: <Private><MyTips /></Private> },
-    { path: '/signin', Component: signinPage },
-    { path: '/signup', Component: SignUpPage },
+    {
+      path: '/tip-details/:id',
+
+      // loader: async ({ params }) => {
+      //   const singleData = await fetch(`http://localhost:5000/active-gardeners?id=${params}`)
+      //   const data = await singleData.json();
+      //   return data
+      // },
+      element: <Private><TipDetails /></Private>
+    },
+    {
+      path: '/My-tips',
+      element: <Private><MyTips /></Private>
+    },
+    {
+      path: '/signin',
+      Component: signinPage
+    },
+    {
+      path: '/signup',
+      Component: SignUpPage
+    },
   ]
 },
 { path: "*", element: <Error /> }

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import SingleRecent from './SingleRecent';
 
 const Gardeners = () => {
   const gardeners = useLoaderData()
+  const navigate = useNavigate()
   const [recentPose, setRecentPost] = useState([])
   useEffect(() => {
     fetch("http://localhost:5000/tips")
@@ -11,10 +12,41 @@ const Gardeners = () => {
       .then(data => setRecentPost(data))
   }, [])
 
+  const singleData = (id) => {
+
+    console.log(id)
+    navigate(`/tip-details/${id}`, { state: id })
+  }
+
+
+
+
   return (
     <div className="max-w-7xl space-y-12 mx-auto px-4 py-10">
       <h2 className="text-3xl font-bold  text-center text-green-600">🌿 Explore Gardeners</h2>
-      <div className="flex flex-wrap justify-center gap-6">
+
+
+      <div className="p-4 flex flex-wrap justify-center gap-6">
+        {gardeners.map(user => (
+          <div key={user._id}
+            className="w-full sm:w-[48%] lg:w-[30%] bg-white rounded-2xl shadow-md p-4 hover:shadow-lg transition"
+          >
+            <img src={user.imageUrl} alt={user.title} className="w-full h-48 object-cover rounded-xl mb-3" />
+            <h2 className="text-xl font-bold text-green-800">{user.title}</h2>
+            <p className="text-sm text-gray-600">{user.description}</p>
+            <p className="mt-2 text-sm"><strong>Tips:</strong> {user.tips}</p>
+            <div className="mt-3 text-sm text-gray-500">
+              <p><strong>User:</strong> {user.UserName} ({user.gender}, {user.age} yrs)</p>
+              <p><strong>Plant Type:</strong> {user.plantType}</p>
+              <p><strong>Experience:</strong> {user.experience}</p>
+              <p><strong>Difficulty:</strong> {user.difficulty}</p>
+              <p><strong>Total Tips Shared:</strong> {user.totalShareTips}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* <div className="flex flex-wrap justify-center gap-6">
         {gardeners.map(gardener => (
           <div
             key={gardener._id}
@@ -37,24 +69,30 @@ const Gardeners = () => {
                   <li><strong>Tips:</strong> {gardener.totalShareTips}</li>
                 </ul>
               </div>
-              <button className="mt-3 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">
+              <button onClick={() => { singleData(gardener._id) }} className="mt-3 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">
                 View Tip
               </button>
             </div>
           </div>
+
+
+
+
         ))}
-      </div>
-      {recentPose && <>
-        <h2>Recently Added</h2>
-        <div>
+      </div> */}
+      {
+        recentPose && <>
+          <h2>Recently Added</h2>
+          <div>
 
-          {recentPose.map(recent => (
-            <SingleRecent key={recent._id} recent={recent} />
-          ))}
+            {recentPose.map(recent => (
+              <SingleRecent key={recent._id} recent={recent} />
+            ))}
 
-        </div>
-      </>}
-    </div>
+          </div>
+        </>
+      }
+    </div >
   );
 };
 

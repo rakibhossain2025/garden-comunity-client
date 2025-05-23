@@ -1,15 +1,16 @@
 import React from 'react';
-import { useNavigate } from 'react-router';
+import {  useNavigate } from 'react-router';
 
-const TipTableBody = ({ singleTip, loaderData }) => {
-  console.log(loaderData)
-  const { category, imageUrl, title, _id } = singleTip
+const TipTableBody = ({ singleTip }) => {
   const navigate = useNavigate()
+
+ 
+  const { category, imageUrl, title, _id } = singleTip
 
 
   const singleData = (id) => {
-    const single = loaderData.find(s => s._id === id)
-    navigate(`/tip-details/${id}`, { state: { data: single } })
+   
+      navigate(`/tip-details/${id}`, {state: id} )
   }
 
   return (

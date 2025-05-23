@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 
 const TipDetails = () => {
   const location = useLocation()
-  const data = location?.state?.data
+  const id = location?.state
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/active-gardeners/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        setData(data)
+      })
+  }, [id])
+
+
   return (
-    <div className="max-w-4xl mx-auto p-6 mt-10 bg-white  rounded-2xl shadow-lg">
+
+    <div className="max-w-4xl mx-auto p-6 mt-10 bg-white my-12 rounded-2xl shadow-lg">
       <div className="grid md:grid-cols-2 gap-6 items-center">
         <div>
           <img

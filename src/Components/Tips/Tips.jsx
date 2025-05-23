@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import TipTableBody from './TipTableBody';
 import { useLoaderData } from 'react-router';
 
 const Tips = () => {
-  const loaderData = useLoaderData()
+  const loaderData = useLoaderData();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const singleData = loaderData.filter(d => d.status === true);
+
+    setData(singleData);
+
+  }, [loaderData]);
+
   return (
     <div className="container p-2 mx-auto sm:p-4 ">
       <h2 className="mb-4 text-2xl font-semibold leading-tight">Invoices</h2>
@@ -18,11 +27,11 @@ const Tips = () => {
             </tr>
           </thead>
           <tbody className=''>
-            {
-              loaderData.map((singleTip) => (
-                < TipTableBody key={singleTip._id} singleTip={singleTip} loaderData={loaderData} />
+             {
+              data.map((singleTip) => (
+                < TipTableBody key={singleTip._id} singleTip={singleTip}  />
               ))
-            }
+            } 
 
           </tbody>
         </table>
