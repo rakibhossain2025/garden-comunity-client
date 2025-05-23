@@ -4,11 +4,12 @@ import { Link } from 'react-router';
 import NavBer_Link from '../utility/NavBer_Link';
 import { UserAuth } from '../Context/UserAuth';
 import { BsLightbulb, BsLightbulbFill } from 'react-icons/bs';
-const Header = ({ theme, handleToggle }) => {
+const Header = () => {
   const { user, handleSignOut } = useContext(UserAuth)
-
   const [dropdown, setDropDown] = useState(false)
   const dropdownClose = useRef(null)
+  const [theme, setTheme] = useState("light");
+
 
   useEffect(() => {
     const handleClickOutside = e => {
@@ -31,10 +32,33 @@ const Header = ({ theme, handleToggle }) => {
     }
   }, [])
 
-
   const handleLogout = () => {
     handleSignOut()
   }
+
+
+  useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    const systemPref = window.matchMedia("(prefers-color-scheme: dark)").matches
+    if (systemPref) {
+      setTheme("dark")
+    } else if ( saved) {
+      setTheme(saved)
+
+    }
+  }, []);
+
+  useEffect(() => {
+    const html = document.documentElement
+    html.setAttribute('data-theme', theme)
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
 
 
   return (<>
@@ -55,13 +79,21 @@ const Header = ({ theme, handleToggle }) => {
 
         <div className="space-x-2  flex gap-2 items-center flex-row-reverse relative">
 
-          <div className="cursor-pointer text-2xl transition-all duration-300" onClick={handleToggle}>
+
+          <div onClick={toggleTheme}>
+            {theme === "light" ? (
+              <span>light</span>) : (
+              <span>dark</span>)}
+          </div>
+
+
+          {/* <div className="cursor-pointer text-2xl transition-all duration-300" onClick={toggleTheme}>
             {theme === "dark" ? (
               <BsLightbulbFill title='click for dark' className='text-yellow-400' />
             ) : (
               <BsLightbulb title='click for light' />
             )}
-          </div>
+          </div> */}
 
           {user ? (
             <div className="relative cursor-pointer">

@@ -1,9 +1,14 @@
 import React from 'react';
+import { HashLoader } from 'react-spinners';
 
 const Loading = () => {
   return (
     <div className='min-h-[calc(100vh-200px)] flex flex-col justify-center items-center'>
-     <span className="loading loading-bars loading-xl"></span>
+    <HashLoader
+  color="#00ff36"
+  speedMultiplier={1}
+/>
+
     </div>
   );
 };
