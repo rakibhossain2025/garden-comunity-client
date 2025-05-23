@@ -19,6 +19,7 @@ const AuthProvider = ({ children }) => {
       setUser(userCredential.user);
       return userCredential;
     } catch (error) {
+      setLoading(false);
       setSigninError(error.message);
       throw error;
     } finally {

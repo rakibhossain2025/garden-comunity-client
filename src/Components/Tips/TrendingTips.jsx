@@ -1,19 +1,17 @@
 import React from 'react';
 import Slider from 'react-slick';
 import SingleTrend from './SingleTrend';
-const TrendingTips = ({ activeGardener }) => {
+const TrendingTips = ({ loader }) => {
 
   const settings = {
     infinite: true,
     slidesToShow: 3,
-    slidesToScroll: 0,
+    slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    speed: 3000,
+    pauseOnHover: true,
+    autoplaySpeed: 1000,
     cssEase: "linear",
-    className: "center",
-    centerMode: true,
-    centerPadding: "60px",
-    speed: 500,
     responsive: [
       {
         breakpoint: 1024,
@@ -45,7 +43,7 @@ const TrendingTips = ({ activeGardener }) => {
   return (<div className='my-12 '>
 
     <Slider {...settings} >
-      {activeGardener.map((trending) => (
+      {loader.map((trending) => (
         <SingleTrend trending={trending} />
       ))}
     </Slider>

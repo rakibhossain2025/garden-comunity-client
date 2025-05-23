@@ -1,10 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 
-const TipTableBody = ({ singleTip }) => {
+const TipTableBody = ({ singleTip, loaderData }) => {
+  console.log(loaderData)
   const { category, imageUrl, title, _id } = singleTip
+  const navigate = useNavigate()
+
+
+  const singleData = (id) => {
+    const single = loaderData.find(s => s._id === id)
+    navigate(`/tip-details/${id}`, { state: { data: single } })
+  }
 
   return (
-    <tr className="border-b  hover:bg-gray-100 border-opacity-20 dark:border-gray-300 dark:bg-gray-50">
+    <tr className="border-b hover:bg-green-200 border-opacity-20 dark:border-gray-300 dark:bg-gray-50">
 
       <td className="p-3">
         <p>{category}</p>
@@ -17,10 +26,8 @@ const TipTableBody = ({ singleTip }) => {
         <p>{title}</p>
       </td>
       <td className="p-3 text-right">
-        <button onClick={() => { console.log(_id) }} className="px-3 py-1 cursor-pointer font-semibold rounded-md dark:bg-green-600 dark:text-gray-50 text-right">Pending</button>
-
+        <button onClick={() => singleData(_id)} className="px-3 py-1 cursor-pointer font-semibold rounded-md dark:bg-green-600 dark:text-gray-50 text-right">Details</button>
       </td>
-
     </tr>
   );
 };

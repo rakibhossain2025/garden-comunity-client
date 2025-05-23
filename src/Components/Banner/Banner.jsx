@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import SingleBanner from './SingleBanner';
 
-const Banner = ({ activeGardener }) => {
+const Banner = ({ loader }) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -17,7 +17,7 @@ const Banner = ({ activeGardener }) => {
     <>
       <Slider {...settings}>
 
-        {activeGardener.map((trending) => (
+        {loader.map((trending) => (
           <SingleBanner trending={trending} />
         ))}
 

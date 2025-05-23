@@ -1,34 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import TipTableBody from './TipTableBody';
+import { useLoaderData } from 'react-router';
 
 const Tips = () => {
-  const [allTips, setAllTips] = useState([])
-  useEffect(() => {
-    fetch('https://assignment-10-server-virid-theta.vercel.app/active-gardeners')
-      .then(res => res.json())
-      .then(data => setAllTips(data))
-  }, [])
+  const loaderData = useLoaderData()
   return (
-    <div className="container p-2 mx-auto sm:p-4 dark:text-gray-800">
+    <div className="container p-2 mx-auto sm:p-4 ">
       <h2 className="mb-4 text-2xl font-semibold leading-tight">Invoices</h2>
       <div className="overflow-x-auto">
-        <table className="min-w-full text-xs">
-
-          <thead className="dark:bg-gray-300">
+        <table className="min-w-full ">
+          <thead className="dark:bg-green-400 ">
             <tr className="text-left">
               <th className="p-3">Category</th>
               <th className="p-3">Image</th>
               <th className="p-3">Title</th>
-              <th className="p-3 text-right">Edit</th>
+              <th className="p-3 text-right">Action</th>
             </tr>
           </thead>
-          <tbody>
-              {
-                allTips.map((singleTip) => (
-                  < TipTableBody key={singleTip._id} singleTip={singleTip} />
-                ))
-              }
-         
+          <tbody className=''>
+            {
+              loaderData.map((singleTip) => (
+                < TipTableBody key={singleTip._id} singleTip={singleTip} loaderData={loaderData} />
+              ))
+            }
+
           </tbody>
         </table>
       </div>

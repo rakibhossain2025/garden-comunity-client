@@ -1,24 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ActiveGardeners from '../Components/activeGardeners/ActiveGardeners';
 import TrendingTips from '../Components/Tips/TrendingTips';
 import Banner from '../Components/Banner/Banner';
+import { useLoaderData } from 'react-router';
 
 
 const Home = () => {
-  const [activeGardener, setActiveGardener] = useState([])
-  useEffect(() => {
-    fetch('https://assignment-10-server-virid-theta.vercel.app/active-gardeners')
-      .then(res => res.json())
-      .then(data => {
-        setActiveGardener(data)
-      })
-  }, [])
+  const loader =useLoaderData()
+   console.log(loader)
 
   return (<>
-    <Banner activeGardener={activeGardener} />
+    <Banner loader={loader} />
 
-    <ActiveGardeners activeGardener={activeGardener} setActiveGardener={setActiveGardener} />
-    <TrendingTips activeGardener={activeGardener} />
+    <ActiveGardeners loader={loader}  />
+    <TrendingTips loader={loader} />
   </>);
 };
 

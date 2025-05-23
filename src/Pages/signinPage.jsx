@@ -11,10 +11,10 @@ const SigninPage = () => {
     const fromData = Object.fromEntries(new FormData(e.target).entries())
     const { password, email } = fromData
     e.preventDefault()
-
     handleLoginUser(email, password)
-      .then(() => {
-        console.log('success')
+      .then((result) => {
+
+        console.log('success', result)
       })
       .catch((error) => {
         console.log(error.code);

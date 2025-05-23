@@ -16,8 +16,6 @@ function App() {
 
       document.documentElement.classList.remove("dark")
     }
-
-
   }, [switchDOL])
 
   return (<>
