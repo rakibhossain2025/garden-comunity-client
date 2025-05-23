@@ -24,12 +24,6 @@ export const router = createBrowserRouter([{
   children: [
     {
       path: '/',
-      hydrateFallbackElement: <Loading />,
-      loader: async () => {
-        const response = await fetch("https://assignment-10-server-virid-theta.vercel.app/active-gardeners");
-        const data = await response.json();
-        return data
-      },
       Component: Home
     },
     {

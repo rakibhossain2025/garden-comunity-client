@@ -6,7 +6,7 @@ const MouseMove = () => {
 
     const handleMouseMove = (e) => {
       if (!mouseTracker) return;
-      mouseTracker.style.left = `${e.clientX + 5}px`;
+      mouseTracker.style.left = `${e.clientX - 10}px`;
       mouseTracker.style.top = `${e.clientY - 10}px`;
     };
 
@@ -30,7 +30,9 @@ const MouseMove = () => {
     };
   }, []);
   return (
-    <span className='w-4 h-5 z-50 rounded-sm border hidden lg:flex border-green-500 bg-transparent fixed animate-spin' id='mouseBg'></span>
+    <span
+      className="hidden lg:block w-7 h-7 fixed pointer-events-none z-[9999] border-2 border-green-400 bg-green-200/10 rounded-full shadow-[0_0_20px_#4ade80] transition-transform duration-100 ease-out animate-pulse"
+    ></span>
   );
 };
 

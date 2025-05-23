@@ -8,7 +8,7 @@ const SingleBanner = ({ trending }) => {
       backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
      url(${imageUrl})`
     }}
-      className='bg-no-repeat flex flex-col gap-2  justify-center items-center bg-center bg-cover min-h-[calc(100vh-64px)]' >
+      className='bg-no-repeat flex flex-col gap-2 max-w-screen justify-center items-center bg-center bg-cover min-h-[calc(100vh-64px)]' >
 
       <h3 className='lg:text-6xl text-xl text-white font-bold  '>{title}</h3>
       <p className='text-sm text-center text-white lg:text-lg '>

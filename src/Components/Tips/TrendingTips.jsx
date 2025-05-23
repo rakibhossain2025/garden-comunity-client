@@ -40,7 +40,7 @@ const TrendingTips = ({ loader }) => {
       }
     ]
   };
-  return (<div className='my-12 '>
+  return (<div className='my-12 max-w-full overflow-x-hidden'>
 
     <Slider {...settings} >
       {loader.map((trending) => (
