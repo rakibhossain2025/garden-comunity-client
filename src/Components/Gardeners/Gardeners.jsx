@@ -1,23 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useLoaderData, useNavigate } from 'react-router';
+import { useLoaderData } from 'react-router';
 import SingleRecent from './SingleRecent';
 
 const Gardeners = () => {
   const gardeners = useLoaderData()
-  const navigate = useNavigate()
   const [recentPose, setRecentPost] = useState([])
+  console.log(recentPose)
   useEffect(() => {
-    fetch("http://localhost:5000/tips")
+    fetch("http://localhost:5000/tips/")
       .then(res => res.json())
       .then(data => setRecentPost(data))
   }, [])
-
-  const singleData = (id) => {
-
-    console.log(id)
-    navigate(`/tip-details/${id}`, { state: id })
-  }
-
 
 
 

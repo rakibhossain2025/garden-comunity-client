@@ -7,10 +7,11 @@ import Tips from "../Components/Tips/Tips";
 import Error from "../Pages/Error";
 import GardenTip from "../Components/GardenTipForm/GardenTip";
 import Private from "../Private/Private";
-import MyTips from "../Private/PrivatePage/MyTips";
 import TipDetails from "../Private/PrivatePage/TipDetails";
 import Loading from "../Components/Loading";
 import Gardeners from "../Components/Gardeners/Gardeners";
+import MyTips from "../Private/PrivatePage/MyTips/MyTips";
+import UpdateMyTips from "../Private/PrivatePage/MyTips/UpdateMyTips";
 
 
 // #52f757 dark text color 
@@ -52,17 +53,18 @@ export const router = createBrowserRouter([{
     },
     {
       path: '/tip-details/:id',
-
-      // loader: async ({ params }) => {
-      //   const singleData = await fetch(`http://localhost:5000/active-gardeners?id=${params}`)
-      //   const data = await singleData.json();
-      //   return data
-      // },
       element: <Private><TipDetails /></Private>
     },
     {
       path: '/My-tips',
       element: <Private><MyTips /></Private>
+    },
+    {
+      path: '/My-tip/update/:id',
+      loader: ({ params }) => {
+        return fetch(`http://localhost:5000/tips/id/${params.id}`)
+      },
+      element: <Private><UpdateMyTips /></Private>
     },
     {
       path: '/signin',
