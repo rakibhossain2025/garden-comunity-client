@@ -7,7 +7,7 @@ const TipDetails = () => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    fetch(`http://localhost:5000/active-gardeners/${id}`)
+    fetch(`https://assignment-10-server-virid-theta.vercel.app/active-gardeners/${id}`)
       .then(res => res.json())
       .then(data => {
         setData(data)

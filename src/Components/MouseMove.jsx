@@ -31,7 +31,7 @@ const MouseMove = () => {
   }, []);
   return (
     <span
-      className="lg:block w-7 h-7 fixed top-0 left-0 pointer-events-none z-[9999] border-2 border-green-400 bg-green-200/10 rounded-full shadow-[0_0_20px_#4ade80] transition-transform duration-100 ease-out animate-pulse"
+      className="lg:block hidden w-7 h-7 fixed top-0 left-0 pointer-events-none z-[9999] border-2 border-green-400 bg-green-200/10 rounded-full shadow-[0_0_20px_#4ade80] transition-transform duration-100 ease-out animate-pulse"
       id='mouseBg'
     ></span>
   );

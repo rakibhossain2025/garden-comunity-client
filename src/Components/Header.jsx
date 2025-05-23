@@ -3,7 +3,8 @@ import { CgMenuGridR } from 'react-icons/cg';
 import { Link } from 'react-router';
 import NavBer_Link from '../utility/NavBer_Link';
 import { UserAuth } from '../Context/UserAuth';
-const Header = ({ SetSwitchDOL, switchDOL }) => {
+import { BsLightbulb, BsLightbulbFill } from 'react-icons/bs';
+const Header = ({ theme, handleToggle }) => {
   const { user, handleSignOut } = useContext(UserAuth)
 
   const [dropdown, setDropDown] = useState(false)
@@ -37,8 +38,8 @@ const Header = ({ SetSwitchDOL, switchDOL }) => {
 
 
   return (<>
-    <header className="bg-white shadow-md sticky top-0 z-50">
-      <div className=" mx-auto = px-4 py-3 flex justify-between items-center">
+    <header className="dark:bg-gray-500 shadow-md ">
+      <div className=" mx-auto px-4 py-3 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <img
             src="https://cdn-icons-png.flaticon.com/512968/5968705.png"
@@ -46,13 +47,22 @@ const Header = ({ SetSwitchDOL, switchDOL }) => {
             className="w-10 h-10"
 
           />
-          <span onClick={() => SetSwitchDOL(!switchDOL)} className="text-2xl font-bold text-blue-700">Garden</span>
+          <span className="text-2xl font-bold text-blue-700">Garden</span>
         </div>
         <div className="hidden md:flex items-center gap-6 text-gray-700 font-medium list-none">
           <NavBer_Link />
         </div>
 
-        <div className="space-x-2 relative">
+        <div className="space-x-2  flex gap-2 items-center flex-row-reverse relative">
+
+          <div className="cursor-pointer text-2xl transition-all duration-300" onClick={handleToggle}>
+            {theme === "dark" ? (
+              <BsLightbulbFill title='click for dark' className='text-yellow-400' />
+            ) : (
+              <BsLightbulb title='click for light' />
+            )}
+          </div>
+
           {user ? (
             <div className="relative cursor-pointer">
               <img

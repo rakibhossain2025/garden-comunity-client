@@ -34,18 +34,14 @@ export const router = createBrowserRouter([{
     {
       path: '/explore-gardeners',
       hydrateFallbackElement: <Loading />,
-      loader: async () => {
-        const response = await fetch("http://localhost:5000/active-gardeners");
-        const data = await response.json();
-        return data
-      },
+      loader: () => fetch("https://assignment-10-server-virid-theta.vercel.app/active-gardeners"),
       Component: Gardeners
     },
     {
       path: '/browse-tips',
       hydrateFallbackElement: <Loading />,
       loader: async () => {
-        const response = await fetch('http://localhost:5000/active-gardeners')
+        const response = await fetch('https://assignment-10-server-virid-theta.vercel.app/active-gardeners')
         const data = await response.json();
         return data
       },
@@ -56,13 +52,13 @@ export const router = createBrowserRouter([{
       element: <Private><TipDetails /></Private>
     },
     {
-      path: '/My-tips',
+      path: '/My-tips/',
       element: <Private><MyTips /></Private>
     },
     {
       path: '/My-tip/update/:id',
       loader: ({ params }) => {
-        return fetch(`http://localhost:5000/tips/id/${params.id}`)
+        return fetch(`https://assignment-10-server-virid-theta.vercel.app/tips/id/${params.id}`)
       },
       element: <Private><UpdateMyTips /></Private>
     },

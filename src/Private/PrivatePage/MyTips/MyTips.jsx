@@ -10,7 +10,7 @@ const MyTips = () => {
 
   const [myTips, setMyTips] = useState([])
   useEffect(() => {
-    fetch(`http://localhost:5000/tips/email/${userEmail}`)
+    fetch(`https://assignment-10-server-virid-theta.vercel.app/tips/email/${userEmail}`)
       .then(res => res.json())
       .then(data => {
         setMyTips(data)
@@ -21,7 +21,7 @@ const MyTips = () => {
   if (MyTipsLoader) return <Loading />
 
   return (<>{
-    myTips !== 0 ?
+    myTips ?
       <div className="container p-2 mx-auto sm:p-4 ">
         <h2 className="mb-4 text-2xl font-semibold leading-tight">Invoices</h2>
         <div className="overflow-x-auto">
@@ -44,7 +44,6 @@ const MyTips = () => {
                     setMyTips={setMyTips} />
                 ))
               }
-
             </tbody>
           </table>
         </div>

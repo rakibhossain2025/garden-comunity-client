@@ -12,13 +12,18 @@ const UpdateMyTips = () => {
     const fromData = new FormData(form)
     const UpdateGardenTip = Object.fromEntries(fromData.entries())
 
-    fetch(`http://localhost:5000/tips/id/${_id}`, {
+    fetch(`https://assignment-10-server-virid-theta.vercel.app/tips/id/${_id}`, {
       method: "PUT",
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(UpdateGardenTip)
     }).then(res => res.json())
       .then(data => {
-        console.log(data)
+        if (data.modifiedCount === 0 || data.modifiedCount < 0) {
+          alert("please change for update")
+        } else{
+          
+          alert("success for change for update")
+        }
       })
 
   }
@@ -62,45 +67,39 @@ const UpdateMyTips = () => {
         <label className="relative">Difficulty<span className="text-red-500 absolute -right-2 text-xl">*</span> </label>
         <select
           name="difficulty"
-          defaultValue={difficulty}
+          defaultValue={difficulty || ""}
           className="w-full p-2 border border-green-600 rounded"
           required
         >
-          <option selected disabled>
-            Difficulty Level
-          </option>
-          <option >Easy</option>
-          <option >Medium</option>
-          <option >Hard</option>
+          <option disabled value="">Difficulty Level</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
         </select>
 
         <label className="relative">Description <span className="text-red-500 absolute -right-2 text-xl">*</span></label>
         <select
           required
-          defaultValue={category}
+          defaultValue={category || ""}
           name="category"
           className="w-full p-2 border border-green-600 rounded"
         >
-          <option selected disabled>
-            Category
-          </option>
-          <option >Composting</option>
-          <option >Plant Care</option>
-          <option >Indoor Gardening</option>
+          <option disabled value="">Category</option>
+          <option value="Composting">Composting</option>
+          <option value="Plant Care">Plant Care</option>
+          <option value="Indoor Gardening">Indoor Gardening</option>
         </select>
 
         <label className="relative">Description <span className="text-red-500 absolute -right-2 text-xl">*</span></label>
         <select
           name="availability"
-          defaultValue={availability}
+          defaultValue={availability || ""}
           className="w-full p-2 border border-green-600 rounded"
           required
         >
-          <option selected disabled>
-            Visibility
-          </option>
-          <option >Public</option>
-          <option>Hidden</option>
+          <option disabled value="">Visibility</option>
+          <option value="Public">Public</option>
+          <option value="Hidden">Hidden</option>
         </select>
         <label className="relative">Description<span className="text-red-500 absolute -right-2 text-xl">*</span></label>
         <textarea
@@ -117,7 +116,7 @@ const UpdateMyTips = () => {
             <label className="relative">User Name <span className="text-[10px] absolute -right-12 text-red-600">read Only</span> </label>
             <input
               type="text"
-              value={user?.displayName || "Name Not Found"}
+              defaultValue={user?.displayName || "Name Not Found"}
               readOnly
               className={`${user?.displayName ? '' : "border-red-400 text-red-500"} w-full outline-none p-2 border rounded bg-gray-100`}
               placeholder="User Name"
@@ -129,7 +128,7 @@ const UpdateMyTips = () => {
             <label className="relative">User Email <span className="text-[10px] absolute -right-12 text-red-600">read Only</span> </label>
             <input
               type="email"
-              value={user?.email || ""}
+              defaultValue={user?.email || ""}
               readOnly
               className="w-full outline-none p-2 border border-green-600 rounded bg-gray-100"
               name="UserEmail"

@@ -11,7 +11,9 @@ const MyTipsBody = ({ singleTip, myTips, setMyTips }) => {
     console.log(id)
     navigate(`/My-tip/update/${id}`)
   }
+
   const deleteData = (id) => {
+    console.log(id)
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -22,26 +24,25 @@ const MyTipsBody = ({ singleTip, myTips, setMyTips }) => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-
-        fetch(`http://localhost:5000/tips/${id}`, {
+        fetch(`https://assignment-10-server-virid-theta.vercel.app/tips/${id}`, {
           method: "DELETE"
         }).then(res => res.json())
           .then(data => {
+            console.log(data)
             const remaining = myTips.filter(t => t._id !== id)
             setMyTips(remaining)
-            console.log(data)
+            console.log(remaining)
             Swal.fire({
               title: "Deleted!",
               text: "Your file has been deleted.",
               icon: "success"
-
             });
           })
       }
     });
   }
   return (
-    <tr className="border-b hover:bg-green-200 border-opacity-20 dark:border-gray-300 dark:bg-gray-50 ">
+    <tr className="border-b hover:bg-green-200 dark:text-[#00ff07] dark:bg-[#000000] border-opacity-20 dark:border-gray-300 dark:bg-gray-50 ">
       <td className="px-3 py-6">
         <p>{category}</p>
       </td>
@@ -53,10 +54,11 @@ const MyTipsBody = ({ singleTip, myTips, setMyTips }) => {
       </td>
       <td className="p-2">
         <div className='flex justify-end flex-row items-center space-x-2 h-full'>
-          <button onClick={() => UpdateData(_id)} className="px-3 py-1 cursor-pointer font-semibold rounded-md dark:bg-green-700 dark:text-gray-50 ">Update</button>
+          <button onClick={() => UpdateData(_id)} className="px-3 py-1 cursor-pointer font-semibold rounded-md dark:bg-green-700 dark:text-gray-500 ">Update</button>
           <button onClick={() => deleteData(_id)} className="px-3 py-1 cursor-pointer font-semibold rounded-md dark:bg-red-600 dark:text-gray-50 ">Delete</button>
         </div>
       </td>
+
     </tr>
   );
 };

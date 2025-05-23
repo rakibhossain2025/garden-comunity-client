@@ -73,7 +73,7 @@ const GardenTip = () => {
           className="w-full p-2 border border-green-600 rounded"
           required
         >
-          <option value="" selected disabled>
+          <option selected disabled>
             Difficulty Level
           </option>
           <option >Easy</option>
@@ -121,7 +121,7 @@ const GardenTip = () => {
             <label className="relative">User Name <span className="text-[10px] absolute -right-12 text-red-600">read Only</span> </label>
             <input
               type="text"
-              value={user?.displayName || "Name Not Found"}
+              defaultValue={user?.displayName || "Name Not Found"}
               readOnly
               className={`${user?.displayName ? '' : "border-red-400 text-red-500"} w-full outline-none p-2 border rounded bg-gray-100`}
               placeholder="User Name"
@@ -133,7 +133,7 @@ const GardenTip = () => {
             <label className="relative">User Email <span className="text-[10px] absolute -right-12 text-red-600">read Only</span> </label>
             <input
               type="email"
-              value={user?.email || ""}
+              defaultValue={user?.email || ""}
               readOnly
               className="w-full outline-none p-2 border border-green-600 rounded bg-gray-100"
               name="UserEmail"
