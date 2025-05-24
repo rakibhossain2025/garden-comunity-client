@@ -10,8 +10,7 @@ const ActiveGardeners = ({ loader }) => {
   }, [loader])
   return (
     <>
-      <h2 className='text-xl lg:text-5xl text-center font-bold my-4'>Active Gardeners</h2>
-      <h2 className={`text-xl font-bold mb-8 text-center ${theme === "light" ? "text-[#063007] underline" : "text-[#52f757]"}`}>
+      <h2 className={`text-2xl mt-12 lg:text-5xl text-center font-bold my-4 font-bold mb-8 text-center ${theme === "light" ? "text-[#063007] underline" : "text-[#52f757]"}`}>
         Featured Gardeners
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
