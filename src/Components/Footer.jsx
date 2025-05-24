@@ -21,7 +21,7 @@ const Footer = () => {
         </div>
         <div>
           <h2 className="text-lg font-semibold mb-3">Link</h2>
-          <ul className="text-sm space-y-2">
+          <ul className="text-sm flex flex-col gap-3 space-y-2">
             <NavBer_Link />
           </ul>
         </div>
