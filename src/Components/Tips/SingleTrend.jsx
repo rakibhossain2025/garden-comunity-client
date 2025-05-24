@@ -9,7 +9,7 @@ const SingleTrend = ({ trending }) => {
   const [Disable, setDisable] = useState(false);
   const handleLike = async () => {
 
-    const res = await fetch(`http://localhost:5000/activeGardeners/like/${_id}`, {
+    const res = await fetch(`https://assignment-10-server-virid-theta.vercel.app/activeGardeners/like/${_id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ const SingleTrend = ({ trending }) => {
           ${theme === 'light' ? 'bg-white text-[#151d16]' : 'bg-[#2C2C33] text-[#52f757]'}`}
       >
         <h1 className='font-bold mb-2 absolute top-1 left-1/2 border-b'>Tips</h1>
-        <p className="mb-4">{tips}</p>
+        <p className="mt-4">{tips}</p>
 
 
         <button

@@ -1,24 +1,50 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { ThemeContext, UserAuth } from '../Context/UserAuth';
 import Swal from 'sweetalert2';
 import { FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router';
+import { toast, ToastContainer } from 'react-toastify';
 
 const SigninPage = () => {
   const { handleLoginUser, loginError, setUser, googleSign } = useContext(UserAuth)
   const { theme } = useContext(ThemeContext)
+  const navigate = useNavigate();
+  const [btnText, setBtnText] = useState(false)
+
   const handleSignInWithPass = (e) => {
-    const fromData = Object.fromEntries(new FormData(e.target).entries())
-    const { password, email } = fromData
-    e.preventDefault()
+    e.preventDefault();
+    const formData = Object.fromEntries(new FormData(e.target).entries());
+    const { email, password } = formData;
+
+    const loadingToast = toast.loading("Signing you in...");
+
     handleLoginUser(email, password)
       .then((result) => {
-        console.log('success', result)
+        setBtnText(true)
+        setUser(result.user);
+        toast.update(loadingToast, {
+          render: "Login successful! 🎉",
+          type: "success",
+          isLoading: false,
+          autoClose: 1500,
+        });
+        
+        setTimeout(() => {
+          navigate('/');
+        }, 1500);
       })
       .catch((error) => {
-        console.log(error.code);
-        console.log(error.message);
+        setBtnText(false)
+        toast.update(loadingToast, {
+          render: `Login failed: ${error.message}`,
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+        });
       });
-  }
+  };
+
+
   const signinGoogle = () => {
     console.log("error.code");
     googleSign()
@@ -47,6 +73,7 @@ const SigninPage = () => {
           <input
             type="email"
             name="email"
+            required
             placeholder="Enter your email"
             className={`w-full px-4 py-3 rounded-md border focus:outline-none focus:ring-2 
           ${theme === "dark"
@@ -61,6 +88,7 @@ const SigninPage = () => {
           <input
             type="password"
             name="password"
+            required
             placeholder="Enter your password"
             className={`w-full px-4 py-3 rounded-md border focus:outline-none focus:ring-2 
           ${theme === "dark"
@@ -74,7 +102,7 @@ const SigninPage = () => {
         </div>
 
         <button type="submit" className="w-full p-3 rounded-md bg-green-600 hover:bg-green-700 text-white font-semibold transition">
-          Sign In
+          {btnText ? "signin..." : "Sign In"}
         </button>
       </form>
 
@@ -110,8 +138,9 @@ const SigninPage = () => {
 
       <p className="text-xs text-center mt-4">
         Don't have an account?{" "}
-        <a href="#" className="underline text-green-600 hover:text-green-800 font-medium">Sign up</a>
+        <Link to='/signup' className="underline text-green-600 hover:text-green-800 font-medium">Sign up</Link>
       </p>
+      <ToastContainer position="top-center" />
     </div>
 
   );

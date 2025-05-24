@@ -79,9 +79,9 @@ const Banner = () => {
     <div className="max-w-full overflow-x-hidden">
       <Slider {...settings}>
         {slides.map((slide, index) => (
-          <div key={index} className="w-full h-[500px]">
+          <div key={index} className="w-full ">
             <div
-              className="w-full h-full bg-cover bg-center text-white flex flex-col justify-center items-start p-8"
+              className="w-full h-[calc(100vh-100px)] bg-cover bg-center text-white flex flex-col justify-center items-start p-8"
               style={{
                 backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('${slide.image}')`,
               }}

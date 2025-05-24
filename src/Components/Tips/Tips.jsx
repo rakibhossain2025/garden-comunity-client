@@ -9,7 +9,7 @@ const Tips = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const singleData = loaderData.filter(d => d.status === true);
+    const singleData = loaderData.filter(d => d.availability !== "Hidden");
 
     setData(singleData);
 

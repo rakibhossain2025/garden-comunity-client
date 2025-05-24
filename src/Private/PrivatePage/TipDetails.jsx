@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { ThemeContext } from '../../Context/UserAuth';
+import Loading from '../../Components/Loading';
 
 const TipDetails = () => {
   const location = useLocation()

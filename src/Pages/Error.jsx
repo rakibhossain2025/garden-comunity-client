@@ -6,11 +6,16 @@ const Error = () => {
 
     <div style={{
       backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)),
-     url(${"https://i.ibb.co/39NhZYHT/istockphoto-1281404534-612x612.jpg"})`
+     url(${"https://i.ibb.co/nW29qpD/2734794-1.jpg"})`
     }}
-    className='flex flex-col min-h-screen bg-no-repeat bg-center justify-center items-center'
+      className='flex flex-col min-h-screen bg-no-repeat bg-center justify-center items-center'
     >
-      <h1 className='text-green-500 font-bold text-xl lg:text-4xl '>error <Link to='/'>go back </Link></h1>
+      <h1 className="text-4xl font-bold text-red-600 mb-4">
+        ❌ Error Occurred!
+      </h1>
+      <Link to="/" className="btn btn-error text-white text-lg">
+        🔙 Go Back to Home
+      </Link>
     </div>
   );
 };

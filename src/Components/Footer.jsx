@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import NavBer_Link from '../utility/NavBer_Link';
 import { ThemeContext } from '../Context/UserAuth';
+import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
   const { theme } = useContext(ThemeContext)
@@ -12,14 +13,12 @@ const Footer = () => {
         }`}
     >
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-      
         <div>
           <h2 className="text-lg font-semibold mb-3">About GardenHive</h2>
           <p className="text-sm">
             GardenHub is a community-driven platform connecting gardening lovers to share tips, join events, and grow together.
           </p>
         </div>
-
         <div>
           <h2 className="text-lg font-semibold mb-3">Link</h2>
           <ul className="text-sm space-y-2">
@@ -38,11 +37,11 @@ const Footer = () => {
         <div>
           <h2 className="text-lg font-semibold mb-3">Follow Us</h2>
           <div className="flex space-x-4">
-            <a href="#" aria-label="Facebook" className="hover:text-green-300">🌿</a>
-            <a href="#" aria-label="Instagram" className="hover:text-green-300">📸</a>
-            <a href="#" aria-label="YouTube" className="hover:text-green-300">🎥</a>
+            <a href="#" aria-label="Facebook" className="hover:text-green-300"><FaFacebook className='text-blue-600' /></a>
+            <a href="#" aria-label="Instagram" className="hover:text-green-300"><FaInstagram/></a>
+            <a href="#" aria-label="YouTube" className="hover:text-green-300"><FaYoutube className='text-red-500' /> </a>
           </div>
-          <p className="mt-4 text-sm">© 2025 GardenHub. All rights reserved.</p>
+          <p className="mt-4 text-sm">© {new Date().getFullYear()} GardenHub. All rights reserved.</p>
         </div>
       </div>
     </footer>

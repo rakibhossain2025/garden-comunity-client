@@ -5,13 +5,23 @@ import Banner from '../Components/Banner/Banner';
 import Loading from '../Components/Loading';
 import ExtraSection from './ExtraSection';
 import { ThemeContext } from '../Context/UserAuth';
+import { useLocation } from 'react-router';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 const Home = () => {
   const [loader, setLoader] = useState([]);
   const [loading, setLoading] = useState(true);
   const { theme } = useContext(ThemeContext)
+  const location = useLocation()
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const successMessage = location.state?.successMessage;
+    if (successMessage) {
+      toast.success(successMessage);
+    }
+  });
   useEffect(() => {
     fetch("https://assignment-10-server-virid-theta.vercel.app/active-gardeners")
       .then(res => res.json())
@@ -31,6 +41,7 @@ const Home = () => {
 
   if (loading) return <Loading />;
   return (<>
+    <ToastContainer position="top-center" autoClose={3000} />
     <Banner />
     <ActiveGardeners loader={loader} />
     <h3 className='text-xl lg:text-5xl text-center font-bold my-12'>Top Trending Tips </h3>
