@@ -99,8 +99,8 @@ const Header = () => {
                 )}
               </div>
             ) : (
-              btnData.map(single => (
-                <button className={`btn hidden lg:block transition duration-300 
+              btnData.map((single,i) => (
+                <button key={i} className={`btn hidden lg:block transition duration-300 
                   ${theme !== "dark"
                     ? "bg-white text-black hover:bg-gray-200"
                     : "bg-[#52f757] text-[#000000] hover:bg-green-900"

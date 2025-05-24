@@ -2,7 +2,6 @@ import React from 'react';
 import Slider from 'react-slick';
 import SingleTrend from './SingleTrend';
 const TrendingTips = ({ loader }) => {
-
   const settings = {
     infinite: true,
     slidesToShow: 3,
