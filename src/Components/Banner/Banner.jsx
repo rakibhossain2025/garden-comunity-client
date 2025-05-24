@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Swal from 'sweetalert2';
+import { ThemeContext } from '../../Context/UserAuth';
 
 const Banner = () => {
+
+  const { theme } = useContext(ThemeContext)
   const settings = {
     dots: false,
     infinite: true,
@@ -54,12 +57,12 @@ const Banner = () => {
     {
       title: "Join Gardening Events",
       description: "Attend or host workshops, plant swaps, compost drives, and community clean-ups.",
-      image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80"
+      image: "https://i.ibb.co/DPhPkdmX/sdfghfdsa.webp"
     },
     {
       title: "Learn & Share Plant Care",
       description: "From balcony herbs to hydroponic setups – discover tips and tricks for thriving plants.",
-      image: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=800&q=80"
+      image: "https://i.ibb.co/mFdqhtvY/seedling2.jpg"
     }
   ];
 
@@ -79,11 +82,23 @@ const Banner = () => {
           <div key={index} className="w-full h-[500px]">
             <div
               className="w-full h-full bg-cover bg-center text-white flex flex-col justify-center items-start p-8"
-              style={{ backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('${slide.image}')` }}
+              style={{
+                backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('${slide.image}')`,
+              }}
             >
-              <h2 className="text-4xl text-black font-bold mb-4">{slide.title}</h2>
+              <h2
+                className={`text-4xl font-bold mb-4 ${theme === "light" ? "text-[#52F757]" : "text-white"
+                  }`}
+              >
+                {slide.title}
+              </h2>
               <p className="mb-6">{slide.description}</p>
-              <button onClick={alertFunction} className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded">Explore Event</button>
+              <button
+                onClick={alertFunction}
+                className="bg-[#3ac041] hover:bg-[#008106] px-6 py-2 rounded"
+              >
+                Explore Event
+              </button>
             </div>
           </div>
         ))}

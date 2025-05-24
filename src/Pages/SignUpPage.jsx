@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { UserAuth } from '../Context/UserAuth';
+import { ThemeContext, UserAuth } from '../Context/UserAuth';
 import { FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const SignUpPage = () => {
-
+  const { theme } = useContext(ThemeContext)
   const { handleCreateUser, googleSign, setUser } = useContext(UserAuth)
 
   const [signUpError, setSignUpError] = useState(null)
@@ -56,54 +57,94 @@ const SignUpPage = () => {
 
 
   return (
-    <div className="w-full max-w-md p-8 space-y-3 rounded-xl mx-auto mt-4 dark:bg-gray-50 dark:text-gray-800">
-      <h1 className="text-2xl font-bold text-center">Sign Up</h1>
-      {
-        signUpError
-        && <p>{signUpError}</p>
-      }
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <div className={`w-full max-w-md mx-auto my-8 p-8 space-y-6 rounded-xl shadow-lg transition duration-300
+  ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-800"}`}>
+
+      <h1 className="text-3xl font-bold text-center text-green-500">Sign Up</h1>
+
+      {signUpError && <p className="text-red-500 text-center font-medium">{signUpError}</p>}
+
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Email */}
         <div className="space-y-1 text-sm">
-          <label className="block dark:text-gray-600">Email</label>
-          <input type="text" name="email" placeholder="Username" className="w-full px-4 py-3 outline rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600" />
+          <label className="block font-medium">Email</label>
+          <input type="email" name="email" placeholder="Enter your email"
+            className={`w-full px-4 py-3 rounded-md border outline-none focus:ring-2 
+        ${theme === "dark"
+                ? "bg-gray-800 text-white border-gray-700 focus:ring-green-500"
+                : "bg-gray-100 text-black border-gray-300 focus:ring-green-600"
+              }`} />
         </div>
+
+        {/* Photo URL */}
         <div className="space-y-1 text-sm">
-          <label className="block dark:text-gray-600">photoURL</label>
-          <input type="text" name="photoURL" placeholder="Username" className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 outline dark:text-gray-800 focus:dark:border-violet-600" />
+          <label className="block font-medium">Photo URL</label>
+          <input type="text" name="photoURL" placeholder="Enter photo URL"
+            className={`w-full px-4 py-3 rounded-md border outline-none focus:ring-2 
+        ${theme === "dark"
+                ? "bg-gray-800 text-white border-gray-700 focus:ring-green-500"
+                : "bg-gray-100 text-black border-gray-300 focus:ring-green-600"
+              }`} />
         </div>
+
+        {/* Name */}
         <div className="space-y-1 text-sm">
-          <label className="block dark:text-gray-600">Name</label>
-          <input type="text" name="name" placeholder="Username" className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 outline focus:dark:border-violet-600" />
+          <label className="block font-medium">Name</label>
+          <input type="text" name="name" placeholder="Your name"
+            className={`w-full px-4 py-3 rounded-md border outline-none focus:ring-2 
+        ${theme === "dark"
+                ? "bg-gray-800 text-white border-gray-700 focus:ring-green-500"
+                : "bg-gray-100 text-black border-gray-300 focus:ring-green-600"
+              }`} />
         </div>
+
+        {/* Password */}
         <div className="space-y-1 text-sm">
-          <label className="block dark:text-gray-600">Password</label>
-          <input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 outline dark:text-gray-800 focus:dark:border-violet-600" />
-          <div className="flex justify-end text-xs dark:text-gray-600">
-            <a className="underline" href="/not-found">Forgot Password?</a>
+          <label className="block font-medium">Password</label>
+          <input type="password" name="password" placeholder="Create a password"
+            className={`w-full px-4 py-3 rounded-md border outline-none focus:ring-2 
+        ${theme === "dark"
+                ? "bg-gray-800 text-white border-gray-700 focus:ring-green-500"
+                : "bg-gray-100 text-black border-gray-300 focus:ring-green-600"
+              }`} />
+          <div className="flex justify-end text-xs">
+            <a href="/not-found" className="text-green-500 hover:underline">Forgot Password?</a>
           </div>
         </div>
-        <button className="block w-full p-3 text-center rounded-sm dark:text-gray-50 dark:bg-violet-600">Sign in</button>
+
+        {/* Submit Button */}
+        <button type="submit"
+          className="w-full bg-green-600 text-white font-semibold py-3 rounded-md hover:bg-green-700 transition">
+          Sign Up
+        </button>
       </form>
-      <div className="flex items-center pt-4 space-x-1">
-        <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
-        <p className="px-3 text-sm dark:text-gray-600">Login with social accounts</p>
-        <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
+
+      {/* Divider */}
+      <div className="flex items-center pt-6 space-x-2">
+        <div className="flex-1 h-px bg-gray-300" />
+        <p className="text-sm">Or continue with</p>
+        <div className="flex-1 h-px bg-gray-300" />
       </div>
-      <div className="flex justify-center space-x-4">
-        <button onClick={signinGoogle} aria-label="Log in with Google" className="p-3 rounded-sm cursor-pointer">
-          <FaGoogle size={25} className='cursor-pointer' />
+
+      {/* Social Login */}
+      <div className="flex justify-center gap-4 pt-2">
+        <button onClick={signinGoogle} className="p-3 rounded-full bg-white shadow hover:shadow-md">
+          <FaGoogle size={20} className='text-green-600' />
         </button>
-        <button aria-label="Log in with Twitter" className="p-3 rounded-sm">
-          <FaTwitter size={25} className='cursor-pointer' />
+        <button onClick={() => Swal.fire({ icon: "error", title: "Twitter login not implemented." })} className="p-3 rounded-full bg-white shadow hover:shadow-md">
+          <FaTwitter size={20} className='text-blue-600' />
         </button>
-        <button aria-label="Log in with GitHub" className="p-3 rounded-sm">
-          <FaGithub size={25} className='cursor-pointer' />
+        <button onClick={() => Swal.fire({ icon: "error", title: "GitHub login not implemented." }) } className="p-3 rounded-full bg-white shadow hover:shadow-md">
+          <FaGithub size={20} className='text-gray-600' />
         </button>
       </div>
-      <p className="text-xs text-center sm:px-6 dark:text-gray-600">Have an account?
-        <a rel="noopener noreferrer" href="#" className="underline dark:text-gray-800">Sign In</a>
+
+      <p className="text-sm text-center pt-4">
+        Already have an account?{" "}
+        <a href="#" className="text-green-600 hover:underline font-medium">Sign In</a>
       </p>
     </div>
+
   );
 };
 

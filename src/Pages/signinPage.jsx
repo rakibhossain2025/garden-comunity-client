@@ -1,19 +1,17 @@
 import React, { useContext } from 'react';
-import { UserAuth } from '../Context/UserAuth';
+import { ThemeContext, UserAuth } from '../Context/UserAuth';
 import Swal from 'sweetalert2';
 import { FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 
 const SigninPage = () => {
-  const { handleLoginUser, loginError, user, setUser, googleSign } = useContext(UserAuth)
-  console.log(user)
-
+  const { handleLoginUser, loginError, setUser, googleSign } = useContext(UserAuth)
+  const { theme } = useContext(ThemeContext)
   const handleSignInWithPass = (e) => {
     const fromData = Object.fromEntries(new FormData(e.target).entries())
     const { password, email } = fromData
     e.preventDefault()
     handleLoginUser(email, password)
       .then((result) => {
-
         console.log('success', result)
       })
       .catch((error) => {
@@ -21,7 +19,6 @@ const SigninPage = () => {
         console.log(error.message);
       });
   }
-
   const signinGoogle = () => {
     console.log("error.code");
     googleSign()
@@ -35,45 +32,88 @@ const SigninPage = () => {
       });
   }
 
-
   return (
-    <div className="w-full max-w-md mx-auto my-4 p-8 space-y-3 rounded-xl dark:bg-gray-50 dark:text-gray-800">
-      {loginError && <p>{loginError}</p>}
-      <h1 className="text-2xl font-bold text-center">Sign In</h1>
+    <div className={`w-full max-w-md mx-auto my-8 p-8 space-y-5 rounded-2xl shadow-lg transition duration-300 
+  ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-800"}`}>
+
+      {loginError && <p className="text-red-500 text-center font-medium">{loginError}</p>}
+
+      <h1 className="text-3xl font-bold text-center text-green-600">Sign In</h1>
+
       <form onSubmit={handleSignInWithPass} className="space-y-6">
+
         <div className="space-y-1 text-sm">
-          <label className="block dark:text-gray-600">Email</label>
-          <input type="email" name="email" id="username" placeholder="Email " className="w-full px-4 py-3 outline rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600" />
+          <label className="block font-semibold">Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            className={`w-full px-4 py-3 rounded-md border focus:outline-none focus:ring-2 
+          ${theme === "dark"
+                ? "bg-gray-800 text-white border-gray-700 focus:ring-green-500"
+                : "bg-gray-100 text-black border-gray-300 focus:ring-green-600"
+              }`}
+          />
         </div>
+
         <div className="space-y-1 text-sm">
-          <label htmlFor="password" className="block dark:text-gray-600">Password</label>
-          <input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-300 outline dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600" />
-          <div className="flex justify-end text-xs dark:text-gray-600">
-            <a rel="noopener noreferrer" href="#">Forgot Password?</a>
+          <label htmlFor="password" className="block font-semibold">Password</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            className={`w-full px-4 py-3 rounded-md border focus:outline-none focus:ring-2 
+          ${theme === "dark"
+                ? "bg-gray-800 text-white border-gray-700 focus:ring-green-500"
+                : "bg-gray-100 text-black border-gray-300 focus:ring-green-600"
+              }`}
+          />
+          <div className="flex justify-end text-xs">
+            <a href="#" className="hover:underline text-green-600">Forgot Password?</a>
           </div>
         </div>
-        <button className="block w-full p-3 text-center rounded-sm dark:text-gray-50 dark:bg-violet-600">Sign in</button>
+
+        <button type="submit" className="w-full p-3 rounded-md bg-green-600 hover:bg-green-700 text-white font-semibold transition">
+          Sign In
+        </button>
       </form>
-      <div className="flex items-center pt-4 space-x-1">
-        <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
-        <p className="px-3 text-sm dark:text-gray-600">Login with social accounts</p>
-        <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
+
+      <div className="flex items-center pt-4 space-x-2">
+        <div className="flex-1 h-px bg-gray-300" />
+        <p className="text-sm">Or login with</p>
+        <div className="flex-1 h-px bg-gray-300" />
       </div>
-      <div className="flex justify-center space-x-4">
-        <button onClick={signinGoogle} aria-label="Log in with Google" className="p-3 rounded-sm cursor-pointer">
-          <FaGoogle size={25} className='cursor-pointer' />
+
+      <div className="flex justify-center gap-4">
+        <button
+          onClick={signinGoogle}
+          aria-label="Log in with Google"
+          className="p-3 rounded-full bg-white shadow hover:shadow-md transition"
+        >
+          <FaGoogle size={20} className='text-green-600' />
         </button>
-        <button onClick={() => { Swal.fire({ icon: "error", text: "we are not implement Twitter  functionality !", title: "Sorry...(only google)", }) }} aria-label="Log in with Twitter" className="p-3 rounded-sm">
-          <FaTwitter size={25} className='cursor-pointer' />
+        <button
+          onClick={() => Swal.fire({ icon: "error", text: "We have not implemented Twitter login yet.", title: "Sorry!" })}
+          aria-label="Log in with Twitter"
+          className="p-3 rounded-full bg-white shadow hover:shadow-md transition"
+        >
+          <FaTwitter size={20} className='text-blue-600' />
         </button>
-        <button onClick={() => { Swal.fire({ icon: "error", text: "we are not implement Twitter  functionality !", title: "Sorry...(only google)", }) }} aria-label="Log in with GitHub" className="p-3 rounded-sm">
-          <FaGithub size={25} className='cursor-pointer' />
+        <button
+          onClick={() => Swal.fire({ icon: "error", text: "We have not implemented GitHub login yet.", title: "Sorry!" })}
+          aria-label="Log in with GitHub"
+          className="p-3 rounded-full bg-white shadow hover:shadow-md transition"
+        >
+          <FaGithub size={20} className='text-gray-600' />
         </button>
       </div>
-      <p className="text-xs text-center sm:px-6 dark:text-gray-600">Don't have an account?
-        <a rel="noopener noreferrer" href="#" className="underline dark:text-gray-800">Sign up</a>
+
+      <p className="text-xs text-center mt-4">
+        Don't have an account?{" "}
+        <a href="#" className="underline text-green-600 hover:text-green-800 font-medium">Sign up</a>
       </p>
     </div>
+
   );
 };
 

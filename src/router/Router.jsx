@@ -57,6 +57,7 @@ export const router = createBrowserRouter([{
     },
     {
       path: '/My-tip/update/:id',
+      hydrateFallbackElement: <Loading />,
       loader: ({ params }) => {
         return fetch(`https://assignment-10-server-virid-theta.vercel.app/tips/id/${params.id}`)
       },

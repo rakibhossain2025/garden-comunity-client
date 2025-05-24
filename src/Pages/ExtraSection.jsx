@@ -3,7 +3,7 @@ import React from 'react';
 const ExtraSection = () => {
   return (<>
     <section className="px-4 py-12 ">
-      <h2 className="text-3xl font-bold text-green-700 mb-6 text-center">🌱 Gardening FAQs</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center">🌱 Gardening FAQs</h2>
       <div className="grid md:grid-cols-2 gap-6">
         <div className="bg-green-50 p-6 rounded-lg shadow hover:shadow-2xl transition hover:-translate-y-1">
           <h3 className="text-lg font-semibold text-green-800">How often should I water my plants?</h3>

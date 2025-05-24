@@ -22,11 +22,11 @@ const MyTips = () => {
 
   return (<>{
     myTips ?
-      <div className="container p-2 mx-auto sm:p-4 ">
-        <h2 className="mb-4 text-2xl font-semibold leading-tight">Invoices</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full ">
-            <thead className="dark:bg-green-400 ">
+      <div className="my-12 p-4 mx-auto">
+        <h2 className="mb-6 text-xl lg:text-4xl font-bold text-center">🌿 My Garden Tips</h2>
+        <div className="overflow-x-auto rounded-lg shadow-md">
+          <table className="min-w-full text-sm">
+            <thead className="bg-green-600 text-white dark:bg-green-500 dark:text-black">
               <tr className="text-left">
                 <th className="p-3">Category</th>
                 <th className="p-3">Image</th>
@@ -34,14 +34,15 @@ const MyTips = () => {
                 <th className="p-3 text-right">Action</th>
               </tr>
             </thead>
-            <tbody className=''>
+            <tbody>
               {
                 myTips.map((singleTip) => (
-                  < MyTipsBody
+                  <MyTipsBody
                     key={singleTip._id}
                     singleTip={singleTip}
                     myTips={myTips}
-                    setMyTips={setMyTips} />
+                    setMyTips={setMyTips}
+                  />
                 ))
               }
             </tbody>
