@@ -66,12 +66,6 @@ const SignUpPage = () => {
           })
           .catch(() => {
             setSignUpText(false)
-            toast.update(loadingToast, {
-              render: 'Failed to save user to database!',
-              type: 'error',
-              isLoading: false,
-              autoClose: 3000
-            });
           });
       })
       .catch(e => {
