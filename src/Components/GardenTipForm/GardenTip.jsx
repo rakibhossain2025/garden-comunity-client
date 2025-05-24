@@ -43,7 +43,7 @@ const GardenTip = () => {
       className={`max-w-3xl mx-auto p-6 mb-10 mt-10 rounded-xl shadow-xl transition duration-300 ${theme === 'light' ? 'bg-white text-black' : 'bg-[#2C2C33] text-white'
         }`}
     >
-      <h2 className="text-3xl font-bold mb-6 text-center">🌱 Share Your Garden Tips</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center">Share Your Garden Tips</h2>
 
       <form onSubmit={handleGardenTips} className="space-y-4">
         <div>
@@ -150,7 +150,7 @@ const GardenTip = () => {
           type="submit"
           className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
         >
-          🌼 Share Tip
+          Share Tip
         </button>
       </form>
     </div>

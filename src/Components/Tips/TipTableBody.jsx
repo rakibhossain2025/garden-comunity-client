@@ -1,13 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 
-const TipTableBody = ({ singleTip,theme }) => {
+const TipTableBody = ({ singleTip, theme }) => {
   const navigate = useNavigate()
-
-
-  const { category, imageUrl, title, _id } = singleTip
-
-
+  const { category, imageUrl, title, _id, difficulty } = singleTip
   const singleData = (id) => {
 
     navigate(`/tip-details/${id}`, { state: id })
@@ -22,13 +18,16 @@ const TipTableBody = ({ singleTip,theme }) => {
         }`}
     >
       <td className="px-3 py-6">
-        <p>{category}</p>
-      </td>
-      <td className="px-3 py-6">
         <img src={imageUrl} alt="Tip" className="w-12 h-12 object-cover rounded" />
       </td>
       <td className="px-3 py-6">
         <p>{title}</p>
+      </td>
+      <td className="px-3 py-6">
+        <p>{category}</p>
+      </td>
+      <td className="px-3 py-6">
+        <p>{difficulty}</p>
       </td>
       <td className="px-3 py-6 text-right">
         <button
