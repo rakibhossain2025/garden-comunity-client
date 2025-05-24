@@ -7,6 +7,7 @@ import ExtraSection from './ExtraSection';
 import { ThemeContext } from '../Context/UserAuth';
 import { useLocation } from 'react-router';
 import { toast, ToastContainer } from 'react-toastify';
+import { Typewriter } from 'react-simple-typewriter';
 
 
 const Home = () => {
@@ -14,7 +15,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const { theme } = useContext(ThemeContext)
   const location = useLocation()
-
+document.title = 'Gardening Community'
   useEffect(() => {
     window.scrollTo(0, 0);
     const successMessage = location.state?.successMessage;
@@ -44,12 +45,21 @@ const Home = () => {
     <ToastContainer position="top-center" autoClose={3000} />
     <Banner />
     <ActiveGardeners loader={loader} />
-    <h3 className='text-xl lg:text-5xl text-center font-bold my-12'>Top Trending Tips </h3>
+    <h3 className='text-xl lg:text-5xl text-center font-bold my-12'>
+      <Typewriter
+        words={["Top Trending Tips", "Hot Gardening Ideas", "New Eco-Friendly Hacks"]}
+        loop={true}
+        cursor
+        cursorStyle=":)"
+        typeSpeed={70}
+        deleteSpeed={50}
+      />
+    </h3>
     <TrendingTips loader={loader} />
     <ExtraSection />
     <div className="px-4 mb-12">
       <h2 className={`text-3xl font-bold mb-6 text-center transition duration-300 ${theme === 'light' ? 'text-black' : 'text-[#52f757]'}`}>
-        🌿 Gardening Tips of the Day
+        Gardening Tips of the Day
       </h2>
       <ul className="space-y-4">
         {tips.map((tip, index) => (

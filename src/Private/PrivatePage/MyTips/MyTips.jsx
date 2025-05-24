@@ -15,6 +15,7 @@ const MyTips = () => {
       .then(res => res.json())
       .then(data => {
         setMyTips(data)
+        document.title = `Gardening Community | My Tips`
         setMyTipsLoader(false)
       })
   }, [userEmail])

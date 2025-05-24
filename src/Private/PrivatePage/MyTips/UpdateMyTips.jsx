@@ -1,18 +1,20 @@
 import React, { useContext } from 'react';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import { ThemeContext, UserAuth } from '../../../Context/UserAuth';
+import { toast, ToastContainer } from 'react-toastify';
 
 const UpdateMyTips = () => {
   const { user } = useContext(UserAuth)
   const { availability, category, description, difficulty, imageUrl, plantType, title, _id } = useLoaderData()
   const { theme } = useContext(ThemeContext)
+  const navigate = useNavigate()
 
+  document.title = 'Gardening Community | Update Tips'
   const handleUpdateGardenTip = e => {
     e.preventDefault()
     const form = e.target
     const fromData = new FormData(form)
     const UpdateGardenTip = Object.fromEntries(fromData.entries())
-
     fetch(`https://assignment-10-server-virid-theta.vercel.app/tips/id/${_id}`, {
       method: "PUT",
       headers: { 'content-type': 'application/json' },
@@ -20,15 +22,17 @@ const UpdateMyTips = () => {
     }).then(res => res.json())
       .then(data => {
         if (data.modifiedCount === 0 || data.modifiedCount < 0) {
-          alert("please change for update")
+          toast.warning("please change for update")
         } else {
-
-          alert("success for change for update")
+          toast.success("success for change for update", {
+            autoClose: 400
+          })
+          setTimeout(() => {
+            navigate("/my-tips")
+          }, 1000);
         }
       })
   }
-
-
   const inputStyle = `w-full outline-none p-2 border rounded transition duration-300 ${theme === 'light'
     ? 'border-green-600 bg-white text-black'
     : 'border-[#52f757] bg-[#1f1f26] text-white placeholder:text-gray-400'
@@ -40,7 +44,7 @@ const UpdateMyTips = () => {
         }`}
     >
       <h2 className="text-3xl font-bold mb-6 text-center">Share Your Garden Tips</h2>
-
+      <ToastContainer position='top-center' autoClose={3000} ></ToastContainer>
       <form onSubmit={handleUpdateGardenTip} className="space-y-4">
         <div>
           <label className="relative">Title<span className="text-red-500 absolute -right-2 text-xl">*</span></label>

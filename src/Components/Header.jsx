@@ -9,7 +9,6 @@ import { IoClose } from 'react-icons/io5';
 
 const Header = () => {
   const { user, handleSignOut } = useContext(UserAuth)
-  console.log(user)
   const { theme, toggleTheme } = useContext(ThemeContext)
   const [dropdown, setDropDown] = useState(false)
   const [mobileMenu, setMobileMenu] = useState(false)

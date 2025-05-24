@@ -1,21 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link, useLoaderData } from 'react-router';
+import React, { useContext } from 'react';
+import {  useLoaderData } from 'react-router';
 import { ThemeContext } from '../../Context/UserAuth';
 import { MdDoNotDisturb, MdOutlinePublic, MdPublic } from "react-icons/md";
 import { RiGitRepositoryPrivateLine } from "react-icons/ri";
 
 
-
-
 const Gardeners = () => {
   const { theme } = useContext(ThemeContext)
   const gardeners = useLoaderData()
-  const [recentPose, setRecentPost] = useState([])
-  useEffect(() => {
-    fetch("https://assignment-10-server-virid-theta.vercel.app/tips/")
-      .then(res => res.json())
-      .then(data => setRecentPost(data))
-  }, [])
+  document.title = 'Gardening Community | Explore gardeners'
+
 
   return (<>
     <div className="max-w-6xl mx-auto px-4 py-12">
@@ -92,33 +86,6 @@ const Gardeners = () => {
         ))}
       </div>
     </div>
-
-    <section className=" px-4 py-12">
-      <h2
-        className={`text-3xl font-bold mb-8 text-center ${theme === 'dark' ? 'text-[#52F757]' : 'text-green-700'
-          }`}
-      >
-        Recently Added Tips
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {recentPose.map((tip, index) => (
-          <div
-            key={index}
-            className={`rounded-xl p-6 hover:shadow-lg transition shadow-md ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black'
-              }`}
-          >
-            <h3 className={`text-2xl font-semibold ${theme === 'dark' && 'text-[#52F757]'} 0 mb-2`}>{tip.title}</h3>
-            {
-              tip.category && (
-                <p className={`text-xs mt-2 ${theme === 'dark' ? 'text-green-300' : 'text-green-500'}`}>
-                  Category: {tip.category}
-                </p>
-              )
-            }
-          </div>
-        ))}
-      </div>
-    </section >
 
   </>)
 

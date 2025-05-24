@@ -9,11 +9,11 @@ const TipDetails = () => {
   const id = location?.state
   const [data, setData] = useState([])
   const [MyTipsLoader, setMyTipsLoader] = useState(true)
-
   useEffect(() => {
     fetch(`https://assignment-10-server-virid-theta.vercel.app/active-gardeners/${id}`)
-      .then(res => res.json())
-      .then(data => {
+    .then(res => res.json())
+    .then(data => {
+        document.title = `Gardening Community | ${data.title}`
         setData(data)
         setMyTipsLoader(false)
       })

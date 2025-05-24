@@ -9,12 +9,10 @@ const MyTipsBody = ({ singleTip, myTips, setMyTips }) => {
   const navigate = useNavigate()
 
   const UpdateData = (id) => {
-    console.log(id)
     navigate(`/My-tip/update/${id}`)
   }
 
   const deleteData = (id) => {
-    console.log(id)
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -28,16 +26,15 @@ const MyTipsBody = ({ singleTip, myTips, setMyTips }) => {
         fetch(`https://assignment-10-server-virid-theta.vercel.app/tips/${id}`, {
           method: "DELETE"
         }).then(res => res.json())
-          .then(data => {
-            console.log(data)
+          .then(() => {
             const remaining = myTips.filter(t => t._id !== id)
             setMyTips(remaining)
-            console.log(remaining)
             Swal.fire({
               title: "Deleted!",
               text: "Your file has been deleted.",
               icon: "success"
             });
+
           })
       }
     });

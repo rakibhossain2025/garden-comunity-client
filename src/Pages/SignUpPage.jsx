@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router';
 
 const SignUpPage = () => {
+  document.title = 'Gardening Community | Sign In'
   const { theme } = useContext(ThemeContext)
   const { handleCreateUser, googleSign, setUser } = useContext(UserAuth)
   const [signUpText, setSignUpText] = useState(false)
@@ -29,11 +30,11 @@ const SignUpPage = () => {
     if (!/[!@#$%^&*]/.test(password)) {
       return toast.error("Password must contain at least one special character. (!  @  #  $  %)");
     }
-    
+
     const loadingToast = toast.loading('Creating your account...');
     handleCreateUser(email, password)
-    .then(result => {
-      setUser(result.user);
+      .then(result => {
+        setUser(result.user);
         const DbUser = {
           email,
           ...OtherData
@@ -85,14 +86,15 @@ const SignUpPage = () => {
 
 
   const signinGoogle = () => {
-    console.log("error.code");
     googleSign()
       .then((result) => {
         setUser(result.user)
-
+        if (result.user) {
+          toast.success("Logged in with Google!");
+          navigate("/My-tips")
+        }
       }).catch((error) => {
-
-        console.log(error);
+        toast.error(`${error}`);
 
       });
   }

@@ -6,7 +6,8 @@ import { Link, useNavigate } from 'react-router';
 import { toast, ToastContainer } from 'react-toastify';
 
 const SigninPage = () => {
-  const { handleLoginUser, loginError, setUser, googleSign } = useContext(UserAuth)
+  document.title = 'Gardening Community | Sign In'
+  const { handleLoginUser, loginError, setSigninError, setUser, googleSign } = useContext(UserAuth)
   const { theme } = useContext(ThemeContext)
   const navigate = useNavigate();
   const [btnText, setBtnText] = useState(false)
@@ -28,7 +29,7 @@ const SigninPage = () => {
           isLoading: false,
           autoClose: 1500,
         });
-        
+
         setTimeout(() => {
           navigate('/');
         }, 1500);
@@ -46,15 +47,15 @@ const SigninPage = () => {
 
 
   const signinGoogle = () => {
-    console.log("error.code");
     googleSign()
       .then((result) => {
         setUser(result.user)
-
+        if (result.user) {
+          toast.success("Logged in with Google! 🎉");
+          navigate("/My-tips")
+        }
       }).catch((error) => {
-
-        console.log(error);
-
+        setSigninError(error);
       });
   }
 

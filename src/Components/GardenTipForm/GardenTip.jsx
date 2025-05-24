@@ -9,7 +9,6 @@ const GardenTip = () => {
     e.preventDefault()
     const popUpTitle = e.target.title.value
     const formData = Object.fromEntries(new FormData(e.target).entries())
-    console.log(formData)
     fetch('https://assignment-10-server-virid-theta.vercel.app/tips', {
       method: 'POST',
       headers: {
@@ -27,7 +26,6 @@ const GardenTip = () => {
             timer: 1500, showConfirmButton: false,
           });
           e.target.reset()
-          console.log('success', data)
         }
       })
   }

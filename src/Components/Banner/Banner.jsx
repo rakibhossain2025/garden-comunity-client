@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Swal from 'sweetalert2';
 import { ThemeContext } from '../../Context/UserAuth';
+import { Typewriter } from 'react-simple-typewriter'
 
 const Banner = () => {
 
@@ -11,7 +12,7 @@ const Banner = () => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 1000,
+    speed: 2000,
     autoplaySpeed: 3000,
     slidesToScroll: 1,
     autoplay: true,
@@ -60,7 +61,7 @@ const Banner = () => {
       image: "https://i.ibb.co/DPhPkdmX/sdfghfdsa.webp"
     },
     {
-      title: "Learn & Share Plant Care",
+      title: "Learn and Share Plant Care",
       description: "From balcony herbs to hydroponic setups – discover tips and tricks for thriving plants.",
       image: "https://i.ibb.co/mFdqhtvY/seedling2.jpg"
     }
@@ -75,6 +76,8 @@ const Banner = () => {
       timer: 1000
     })
   }
+
+
   return (
     <div className="max-w-full overflow-x-hidden">
       <Slider {...settings}>
@@ -90,7 +93,14 @@ const Banner = () => {
                 className={`text-4xl font-bold mb-4 ${theme === "light" ? "text-[#52F757]" : "text-white"
                   }`}
               >
-                {slide.title}
+               <Typewriter
+                       words={[`${slide.title}`]}
+                       loop={true}
+                       cursor
+                       cursorStyle=":)"
+                       typeSpeed={100}
+                       deleteSpeed={20}
+                     />
               </h2>
               <p className="mb-6">{slide.description}</p>
               <button
