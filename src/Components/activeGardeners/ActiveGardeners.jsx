@@ -1,50 +1,49 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { ThemeContext } from '../../Context/UserAuth';
+import React, { useEffect, useState } from 'react';
+import Title from '../Shared/Title';
+import { Link } from 'react-router';
+import Container from '../Shared/Container';
 
 const ActiveGardeners = ({ loader }) => {
-  const { theme } = useContext(ThemeContext)
-  const [active, setActive] = useState([])
+  const [active, setActive] = useState([]);
+
   useEffect(() => {
-    const activeProfile = loader.filter(a => a.availability !== "Hidden")
-    setActive(activeProfile)
-  }, [loader])
+    const activeProfile = loader.filter(a => a.availability !== "Hidden");
+    setActive(activeProfile);
+  }, [loader]);
+
   return (
     <>
-      <h2 className={`text-2xl mt-12 lg:text-5xl text-center font-bold my-4 font-bold mb-8 text-center ${theme === "light" ? "text-[#063007] underline" : "text-[#52f757]"}`}>
-        Featured Gardeners
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {active.map((gardener, index) => (
-          <div
-            key={index}
-            className={`p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 ${theme === "light"
-                ? "bg-white text-gray-800"
-                : "bg-[#1e1e1e] text-[#52f757]"
-              }`}
-          >
-            <img
-              src={gardener.userImg}
-              alt={gardener.UserName}
-              className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-green-400 object-cover shadow-md"
-            />
+      <Title text={'Featured Gardeners'} />
+      <Container>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-2">
+          {active.map((gardener, index) => (
 
-            <h3 className="text-xl font-bold text-center mb-1">{gardener.UserName}</h3>
+              <div key={index} className="rounded-xl border dark:border-[#52f757]/30 border-green-300 p-4 bg-white dark:bg-[#292222] text-black dark:text-[#52f757] shadow-md hover:shadow-xl transition-all duration-300 flex flex-col ">
+                <div className="flex items-center gap-4">
+                  <img
+                    src={gardener.userImg}
+                    alt={gardener.UserName}
+                    className="w-16 h-16 rounded-full object-cover border-2 border-green-500"
+                  />
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold">{gardener.UserName}</h3>
+                    <p className="text-sm italic text-gray-500 dark:text-green-300">{gardener.category}</p>
+                  </div>
+                </div>
+                <p className="my-3 flex-1 text-xs col-span-full italic text-gray-500 dark:text-gray-400">
+                  "{gardener.tips?.slice(0, 70)}..."
+                </p>
+                <Link to={`/explore-gardeners`}>
+                  <button className="w-full cursor-pointer">
+                    View Profile
+                  </button>
+                </Link>
+              </div>
 
-            <p className="text-sm text-center mb-1 italic">{gardener.category}</p>
-            <p className="text-sm text-center mb-2"><span className='font-bold'>Difficulty:</span> {gardener.difficulty}</p>
+          ))}
+        </div>
+      </Container>
 
-            <div className="flex justify-center gap-4 text-sm mb-3">
-              <span>{gardener.plantType}</span>
-              <span>{gardener.experience}</span>
-              <span>{gardener.age} yrs</span>
-            </div>
-
-            <p className="text-xs text-center italic text-gray-500 dark:text-[#aaaaaa]">
-              "{gardener.tips?.slice(0, 60)}..."
-            </p>
-          </div>
-        ))}
-      </div>
     </>
   );
 };

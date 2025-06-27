@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 
-const TipTableBody = ({ singleTip, theme }) => {
+const TipTableBody = ({ singleTip }) => {
   const navigate = useNavigate()
   const { category, imageUrl, title, _id, difficulty } = singleTip
   const singleData = (id) => {
@@ -10,38 +10,31 @@ const TipTableBody = ({ singleTip, theme }) => {
   }
 
   return (
-    <tr
-      className={`border-b border-opacity-20 transition duration-300
-        ${theme === 'dark'
-          ? 'hover:bg-green-100/30 bg-[#0f172a] text-white dark:border-gray-700'
-          : 'hover:bg-green-200 bg-white text-black border-gray-300'
-        }`}
+   <tr
+  className="border-b dark:border-gray-700 border-gray-300 bg-white dark:bg-[#0f172a] hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-300"
+>
+  <td className="px-3 py-6">
+    <img src={imageUrl} alt="Tip" className="w-12 h-12 object-cover rounded" />
+  </td>
+  <td className="px-3 py-6">
+    <p>{title}</p>
+  </td>
+  <td className="px-3 py-6">
+    <p>{category}</p>
+  </td>
+  <td className="px-3 py-6">
+    <p>{difficulty}</p>
+  </td>
+  <td className="px-3 py-6 text-right">
+    <button
+      onClick={() => singleData(_id)}
+      className="px-3 py-1 font-medium rounded-md bg-black text-white hover:opacity-80 dark:bg-white dark:text-black transition"
     >
-      <td className="px-3 py-6">
-        <img src={imageUrl} alt="Tip" className="w-12 h-12 object-cover rounded" />
-      </td>
-      <td className="px-3 py-6">
-        <p>{title}</p>
-      </td>
-      <td className="px-3 py-6">
-        <p>{category}</p>
-      </td>
-      <td className="px-3 py-6">
-        <p>{difficulty}</p>
-      </td>
-      <td className="px-3 py-6 text-right">
-        <button
-          onClick={() => singleData(_id)}
-          className={`px-3 py-1 cursor-pointer font-semibold rounded-md transition
-            ${theme === 'dark'
-              ? 'bg-green-600 text-white hover:bg-green-500'
-              : 'bg-green-400 text-black hover:bg-green-500'
-            }`}
-        >
-          Details
-        </button>
-      </td>
-    </tr>
+      Details
+    </button>
+  </td>
+</tr>
+
   );
 };
 

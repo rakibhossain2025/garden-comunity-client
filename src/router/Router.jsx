@@ -12,6 +12,10 @@ import Loading from "../Components/Loading";
 import Gardeners from "../Components/Gardeners/Gardeners";
 import MyTips from "../Private/PrivatePage/MyTips/MyTips";
 import UpdateMyTips from "../Private/PrivatePage/MyTips/UpdateMyTips";
+import Faq from "../Pages/Faq";
+import Dashboard from "../Private/DashBord/Dashbord";
+import EntryPoint from "../Private/DashBord/EntryPoint";
+import AboutUs from "../Pages/AboutUs";
 
 
 // #52f757 dark text color 
@@ -28,23 +32,12 @@ export const router = createBrowserRouter([{
       Component: Home
     },
     {
-      path: '/share-a-garden-tip',
-      element: <Private><GardenTip /></Private>
-    },
-    {
       path: '/explore-gardeners',
-      hydrateFallbackElement: <Loading />,
-      loader: () => fetch("https://assignment-10-server-virid-theta.vercel.app/active-gardeners"),
       Component: Gardeners
     },
     {
       path: '/browse-tips',
-      hydrateFallbackElement: <Loading />,
-      loader: async () => {
-        const response = await fetch('https://assignment-10-server-virid-theta.vercel.app/active-gardeners')
-        const data = await response.json();
-        return data
-      },
+
       Component: Tips
     },
     {
@@ -64,6 +57,14 @@ export const router = createBrowserRouter([{
       element: <Private><UpdateMyTips /></Private>
     },
     {
+      path: '/about-us',
+      Component: AboutUs
+    },
+    {
+      path: '/faq',
+      Component: Faq
+    },
+    {
       path: '/signin',
       Component: signinPage
     },
@@ -72,6 +73,19 @@ export const router = createBrowserRouter([{
       Component: SignUpPage
     },
   ]
+}, {
+  path: 'dashboard',
+  Component: Dashboard,
+  children: [
+    {
+      index: true,
+      Component: EntryPoint
+    }, {
+      path: 'share-tip',
+      element: <Private><GardenTip /></Private>
+    },
+  ]
+
 },
 { path: "*", element: <Error /> }
 ])

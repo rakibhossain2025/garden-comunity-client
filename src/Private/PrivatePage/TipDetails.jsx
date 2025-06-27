@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-import { ThemeContext } from '../../Context/UserAuth';
 import Loading from '../../Components/Loading';
 import { BiLike, BiSolidLike } from 'react-icons/bi';
 
 const TipDetails = () => {
   const location = useLocation()
-  const { theme } = useContext(ThemeContext)
   const id = location?.state
   const [data, setData] = useState([])
   const [MyTipsLoader, setMyTipsLoader] = useState(true)
@@ -43,29 +41,28 @@ const TipDetails = () => {
   };
 
   return (
-    <div className={`max-w-5xl my-12 mx-auto p-6 mt-10 rounded-2xl shadow-2xl transition duration-300
-      ${theme === 'dark' ? 'bg-[#1e293b] text-white' : 'bg-white text-gray-800'}`}>
+    <div className="max-w-5xl my-12 mx-auto p-6 mt-10 rounded-2xl shadow-2xl transition duration-300 bg-white text-gray-800">
 
       <div className="grid md:grid-cols-2 gap-8 items-center">
 
-        <div className=''>
+        <div>
           <img
             src={data.imageUrl}
             alt={data.title}
             className="w-full h-72 object-cover rounded-xl shadow-md ring-2 ring-green-500/30"
           />
-          <p className={`text-center font-semibold mt-4 text-lg italic
-            ${theme === 'dark' ? 'text-green-200' : 'text-green-700'}`}>
+          <p className="text-center font-semibold mt-4 text-lg italic text-green-700">
             {data.description}
           </p>
           <button
             disabled={Disable}
             onClick={handleLike}
-            className={`flex items-center gap-2 font-bold px-5 py-2 transition-all duration-300 w-full  rounded-bl-2xl rounded-tr-2xl
-              ${Disable
+            className={`flex items-center gap-2 font-bold px-5 py-2 transition-all duration-300 w-full rounded-bl-2xl rounded-tr-2xl
+          ${Disable
                 ? 'bg-gray-500 text-white cursor-not-allowed opacity-70'
                 : 'bg-green-600 hover:bg-green-700 text-white hover:scale-105 shadow-md'
-              }`}>
+              }`}
+          >
             {Disable ? (
               <BiSolidLike className="text-lg" />
             ) : (
@@ -74,8 +71,9 @@ const TipDetails = () => {
             <span className="text-base font-semibold">({likes})</span>
           </button>
         </div>
+
         <div>
-          <h2 className="text-4xl font-extrabold text-green-600 dark:text-green-400 mb-4">
+          <h2 className="text-4xl font-extrabold text-green-600 mb-4">
             {data.title}
           </h2>
 
@@ -93,17 +91,15 @@ const TipDetails = () => {
 
           <div className="mt-6">
             <p className="text-md font-medium mb-2">🌿 Pro Tip:</p>
-            <div className={`p-4 rounded-xl shadow-inner transition
-              ${theme === 'dark'
-                ? 'bg-green-900 text-green-100'
-                : 'bg-green-50 text-green-900'
-              }`}>
+            <div className="p-4 rounded-xl shadow-inner bg-green-50 text-green-900">
               {data.tips}
             </div>
           </div>
         </div>
+
       </div>
     </div>
+ 
   );
 };
 

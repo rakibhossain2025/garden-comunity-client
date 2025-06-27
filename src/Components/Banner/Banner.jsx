@@ -1,17 +1,15 @@
-import React, { useContext } from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Swal from 'sweetalert2';
-import { ThemeContext } from '../../Context/UserAuth';
 import { Typewriter } from 'react-simple-typewriter'
+import { Link } from 'react-router';
 
 const Banner = () => {
 
-  const { theme } = useContext(ThemeContext)
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: true, adaptiveHeight: true,
     speed: 2000,
     autoplaySpeed: 3000,
     slidesToScroll: 1,
@@ -48,7 +46,7 @@ const Banner = () => {
     {
       title: "Welcome to GreenConnect",
       description: "Your ultimate gardening community – share tips, ask questions, and grow together!",
-      image: "https://i.ibb.co/PzbMNhrq/premium-photo-1665657351340-f5088ce0e062.jpg"
+      image: "https://static.vecteezy.com/system/resources/thumbnails/018/746/497/small/colorful-welcome-sign-over-red-black-background-modern-trend-design-night-bright-advertising-art-banner-vector.jpg"
     },
     {
       title: "Find Local Gardeners",
@@ -67,53 +65,46 @@ const Banner = () => {
     }
   ];
 
-  const alertFunction = () => {
-
-    Swal.fire({
-      icon: "warning",
-      title: "We are Sorry",
-      showConfirmButton: false,
-      timer: 1000
-    })
-  }
-
-
   return (
-    <div className="max-w-full overflow-x-hidden">
+    <div className="w-full max-h-[1400px] overflow-x-hidden">
       <Slider {...settings}>
+
         {slides.map((slide, index) => (
-          <div key={index} className="w-full ">
+          <div key={index}>
             <div
-              className="w-full h-[calc(100vh-100px)] bg-cover bg-center text-white flex flex-col justify-center items-start p-8"
+              className="dark:text-white text-[#52F757] flex max-h-[1400px] h-[75vh] flex-col justify-center items-start p-8"
               style={{
-                backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('${slide.image}')`,
+                backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${slide.image}')`,
+                minHeight: '100%',
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
               }}
             >
               <h2
-                className={`text-4xl font-bold mb-4 ${theme === "light" ? "text-[#52F757]" : "text-white"
-                  }`}
-              >
-               <Typewriter
-                       words={[`${slide.title}`]}
-                       loop={true}
-                       cursor
-                       cursorStyle=":)"
-                       typeSpeed={100}
-                       deleteSpeed={20}
-                     />
+                className="text-4xl font-bold mb-4">
+                <Typewriter
+                  words={[`${slide.title}`]}
+                  loop={true}
+                  cursor
+                  cursorStyle=":)"
+                  typeSpeed={100}
+                  deleteSpeed={20}
+                />
               </h2>
               <p className="mb-6">{slide.description}</p>
-              <button
-                onClick={alertFunction}
-                className="bg-[#3ac041] hover:bg-[#008106] px-6 py-2 rounded"
-              >
+              <Link to='/explore-gardeners'>
+              <button                >
                 Explore Event
               </button>
+                </Link>
             </div>
           </div>
-        ))}
-      </Slider>
-    </div>
+
+        ))
+        }
+      </Slider >
+    </div >
   );
 };
 

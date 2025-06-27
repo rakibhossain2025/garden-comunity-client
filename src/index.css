@@ -1,2 +1,41 @@
-@import "tailwindcss";
-@plugin "daisyui";
+ @import "tailwindcss";
+ @custom-variant dark (&:where([data-theme=dark] *));
+
+ @layer base {
+   body {
+     @apply bg-white dark:bg-[#2e2e2e] text-black dark:text-[#52F757] transition-all duration-200;
+   }
+
+
+   button {
+     @apply bg-[#3ac041] hover:bg-[#0ad814] px-6 py-2 dark:hover:bg-blue-600 dark:bg-blue-800 rounded-sm text-black dark:text-white;
+   }
+
+   input,
+   textarea,
+   select {
+     @apply w-full p-2 rounded-md border outline-none transition duration-200 border-green-600 bg-white text-black dark:border-[#52f757] dark:bg-[#1f1f26] dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500;
+   }
+
+ }
+
+ table {
+   @apply w-full border-collapse;
+ }
+
+ thead {
+   @apply bg-green-500 text-black dark:bg-green-600 dark:text-white;
+ }
+
+ th,
+ td {
+   @apply px-4 py-3 text-left border-b dark:border-gray-700;
+ }
+
+ tr {
+   @apply transition-colors duration-200;
+ }
+
+ tbody tr:hover {
+   @apply bg-green-100 dark:bg-green-800/40;
+ }

@@ -1,10 +1,7 @@
-import React, { useContext } from 'react';
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
-import { ThemeContext } from '../../../Context/UserAuth';
 
 const MyTipsBody = ({ singleTip, myTips, setMyTips }) => {
-  const { theme } = useContext(ThemeContext)
   const { imageUrl, category, _id, title } = singleTip
   const navigate = useNavigate()
 
@@ -42,32 +39,30 @@ const MyTipsBody = ({ singleTip, myTips, setMyTips }) => {
 
 
   return (
-    <tr
-      className={`border-b transition duration-300 ${theme === 'light' ? 'hover:bg-green-300/70' : 'hover:bg-green-200/20'
-        }`}
-    >
-      <td className="px-3 py-4 font-medium">{category}</td>
-      <td className="px-3 py-4">
-        <img src={imageUrl} alt="tip" className="w-12 h-12 rounded shadow-md object-cover" />
-      </td>
-      <td className="px-3 py-4">{title}</td>
-      <td className="px-3 py-4 text-right">
-        <div className="flex justify-end gap-2">
-          <button
-            onClick={() => UpdateData(_id)}
-            className="px-3 py-1 font-semibold rounded bg-yellow-300 hover:bg-yellow-400 text-black dark:bg-yellow-500 dark:text-black"
-          >
-            Update
-          </button>
-          <button
-            onClick={() => deleteData(_id)}
-            className="px-3 py-1 font-semibold rounded bg-red-600 hover:bg-red-700 text-white"
-          >
-            Delete
-          </button>
-        </div>
-      </td>
-    </tr>
+  <tr className="border-b transition duration-300 hover:bg-green-300/70">
+  <td className="px-3 py-4 font-medium">{category}</td>
+  <td className="px-3 py-4">
+    <img src={imageUrl} alt="tip" className="w-12 h-12 rounded shadow-md object-cover" />
+  </td>
+  <td className="px-3 py-4">{title}</td>
+  <td className="px-3 py-4 text-right">
+    <div className="flex justify-end gap-2">
+      <button
+        onClick={() => UpdateData(_id)}
+        className="px-3 py-1 font-semibold rounded bg-yellow-300 hover:bg-yellow-400 text-black"
+      >
+        Update
+      </button>
+      <button
+        onClick={() => deleteData(_id)}
+        className="px-3 py-1 font-semibold rounded bg-red-600 hover:bg-red-700 text-white"
+      >
+        Delete
+      </button>
+    </div>
+  </td>
+</tr>
+
   );
 };
 
